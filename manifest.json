@@ -10,6 +10,7 @@
 
     "permissions": [
         "cookies",
-        "*://sos.devine-tools.be/*"
+        "*://sos.devine-tools.be/*",
+        "http://sandbox.krivi.be/sos/"
     ]
 }

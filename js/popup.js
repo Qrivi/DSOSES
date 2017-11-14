@@ -1,26 +1,26 @@
-var sosdata = {};
+let user;
+let consultations = {};
 
-function checkAuth() {
+const checkAuth = () => {
     $.get( 'https://sos.devine-tools.be/student/consulten', function( data ) {
-            var consultations = [];
             var title = $( data )
                 .filter( 'title' )
                 .text();
-
-            sosdata[ name ] = '';
-            sosdata[ consultations ] = {};
 
             if( title === 'Devine SOS tool - login' )
                 return createError( 'Not logged in' );
             if( title !== 'Devine SOS tool - overzicht consulten' )
                 return createError( 'Something went wrong' );
-            if( !sosdata.name )
-                $.get( 'https://sos.devine-tools.be/student/profiel', function( data ) {
-                    sosdata.name = $( data )
+            if( !user )
+                $.get( 'https://sos.devine-tools.be/student/profiel', ( data ) => {
+                    user = $( data )
                         .find( '.profile-container h1' )
-                        .text();
+                        .text()
+                        .trim();
+                    console.log( 'Fetched user: ', user );
                 } );
 
+            fetchConsultation( 'http://sandbox.krivi.be/sos/' ); //TODO remove hier en in manifest
             $( data )
                 .find( '.overview-table-container a' )
                 .each( function() {
@@ -30,29 +30,41 @@ function checkAuth() {
         .fail( createError );
 }
 
-function fetchConsultation( href ) {
-    $.get( href, function( data ) {
+const fetchConsultation = ( href ) => {
+    $.get( href, ( data ) => {
         $( data )
-            .find( '.registrations-container' ) // todo go deeper
+            .find( '.registrations-container .registration > span' )
             .each( function() {
-                if( this.text() === name )
-                    parseConsultation( this.closest( 'article.table' ) );
+                let row = $( this )
+                    .text();
+                if( row
+                    .includes( user ) )
+                    parseConsultation( this.closest( 'article.table' ), row );
             } );
     } );
 }
 
-function parseConsultation( consultation ) {
-    // kan je op meerdere conslts tegelijk inschrijven 
-    // - op zelfde moment
-    // - op ander moment?
+const parseConsultation = ( consultation, row ) => {
+    let lecturer = $( consultation )
+        .find( '.table-name span' )
+        .first()
+        .text();
+    let id = lecturer
+        .replace( /\W/g, '' )
+        .toLowerCase();
+    let position = parseInt( row.substr( 0, row.indexOf( '.' ) ) ) - 1;
+
+    consultations[ id ] = { id: id, lecturer: lecturer position: position, html: consultation };
+    // eerst kijken of consultation al bestaat, zodat er melding gegeven kan worden als user plaatsje stijgt
 }
 
-function createError( message ) {
+const createError = ( message ) => {
     if( !message )
         message = 'Could not connect';
-    sosdata = { error: message };
-    //todo push sosdata
+    consultations = { error: message };
 }
 
 document.getElementById( 'btn' )
     .addEventListener( 'click', checkAuth );
+document.getElementById( 'btn2' )
+    .addEventListener( 'click', () => console.log( consultations ) );

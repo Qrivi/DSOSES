@@ -1,0 +1,3 @@
+- masonry injecteren
+- ajax refresh
+- dichtklapbare tafels
