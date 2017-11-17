@@ -3,12 +3,22 @@
     "name": "SOS-SOS",
     "version": "0.1",
 
+    "background": {
+        "page": "html/background.html"
+    },
+
+    "content_scripts": [{
+        "matches": ["*://sos.devine-tools.be/student/consulten", "*://sandbox.krivi.be/sos*"],
+        "js": ["js/jquery-3.2.1.min.js", "js/listener.js"]
+    }],
+
     "browser_action": {
         "default_icon": "img/icon.png",
         "default_popup": "html/popup.html"
     },
 
     "permissions": [
+        "storage",
         "cookies",
         "*://sos.devine-tools.be/*",
         "http://sandbox.krivi.be/sos/"
