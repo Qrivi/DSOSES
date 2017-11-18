@@ -1,5 +1,5 @@
 let user;
-let consultations = {};
+let dataset;
 let firstRun = true;
 
 const checkAuth = () => {
@@ -51,8 +51,8 @@ const fetchConsultation = ( href ) => {
 }
 
 const parseConsultation = ( consultation, row ) => {
-    if( consultations.error )
-        delete consultations.error;
+    if( dataset.error )
+        delete dataset.error;
 
     if( firstRun ) {
         firstRun = false;
@@ -69,21 +69,19 @@ const parseConsultation = ( consultation, row ) => {
         .toLowerCase();
     let position = parseInt( row.substr( 0, row.indexOf( '.' ) ) ) - 1;
 
-    if( config.showNotifications && consultations[ id ] && consultations[ id ][ position ] !== position )
+    if( config.showNotifications && dataset.position && dataset.position !== position )
         if( config.showAllNotifications )
             showNotification( lecturere, position );
         else if( config.showQueueNotification >= position )
         showNotification( lecturere, position );
 
-    consultations[ id ] = { id: id, lecturer: lecturer, position: position, html: consultation };
-    saveConsultations();
+    dataset = { id: id, lecturer: lecturer, position: position, html: consultation };
 }
 
 const createError = ( message ) => {
     if( !message )
         message = 'Could not connect';
-    consultations = { error: message };
-    saveConsultations();
+    dataset = { error: message };
 }
 
 const showNotification = ( lecturer, position ) => {
@@ -99,13 +97,6 @@ const showNotification = ( lecturer, position ) => {
         title: 'Devine SOS',
         message: message
     } );
-}
-
-const saveConsultations = () => {
-    console.log( "Saving consultations to sessionStorage" );
-
-    if( consultations.error || config.enabled )
-        sessionStorage.setItem( 'sos_data', JSON.stringify( consultations ) );
 }
 
 // document.getElementById( 'btn' )

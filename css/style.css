@@ -1,8 +1,207 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
-@import url('https://sos.devine-tools.be/css/styles.css');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700');
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
 /*=*/
 
-#options {
+* {
+    box-sizing: border-box;
+    outline: none;
+    user-select: none;
+    margin: 0;
+    padding: 0;
+}
+
+#popup {
+    width: 400px;
+    font-family: 'Roboto', sans-serif;
+    font-size: .8em;
+    font-size: 1.2em;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 61px;
+    background-color: #333;
+}
+
+.top-bar svg {
+    cursor: pointer;
+    fill: #FFF;
+}
+
+.top-bar div {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+    width: 70px;
+    margin-right: 7px;
+}
+
+.top-bar svg.logo {
+    width: 44px;
+    height: 44px;
+}
+
+.top-bar svg.options {
+    width: 20px;
+    height: 20px;
+}
+
+.top-bar svg.power {
+    width: 23px;
+    height: 23px;
+}
+
+.top-bar svg.power.off, .top-bar svg.power.on:hover {
+    fill: #EA5888;
+}
+
+.top-bar svg:hover, .top-bar svg.power.off:hover, .top-bar svg.power.on {
+    fill: #74FBFD;
+}
+
+.topbar #options {
     padding: 50px 20px;
     min-width: 900px;
+}
+
+main article:not(.table) {
+    padding: 20px;
+}
+
+h1 {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 1.6em;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+h2 {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 1.2em;
+    font-weight: 400;
+    line-height: .1em;
+    color: #AAA;
+    margin-bottom: 8px;
+    line-height: 1.4em;
+}
+
+button:not(.icon) {
+    background-color: #00ffff;
+    color: #000;
+    transition: background-color .2s ease-in, color .2s ease-in;
+    min-width: 260px;
+    min-height: 70px;
+    margin: 30px 0;
+    border-radius: 10px;
+    border: none;
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: 1.85em;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    line-height: 1.9em;
+    cursor: pointer;
+    float: right;
+}
+
+button:not(.icon):hover {
+    background-color: #000;
+    color: #00ffff;
+}
+
+p {
+    font-size: .85em;
+    line-height: 1.5em;
+    padding-top: 10px;
+}
+
+span.info {
+    display: inline-block;
+    border-bottom: 1px dotted #AAA;
+    cursor: help;
+}
+
+p.info {
+    display: none;
+    color: #AAA;
+}
+
+/*=*/
+
+.table {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: #efefef;
+    margin-bottom: 16px;
+    font-size: .85em;
+}
+
+.table .registrations-closed {
+    padding: 16px;
+    background-color: #fe4b89;
+    color: #fff;
+    text-align: center;
+}
+
+.table .table-name {
+    font-weight: 700;
+    padding: 16px;
+    text-align: center;
+    font-weight: 700;
+    background-color: #00ffff;
+}
+
+.table .lecturers-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background: #ccc;
+    padding: 16px;
+    font-size: .6em;
+}
+
+.table .lecturers-container img {
+    border-radius: 80px;
+    border: 4px solid #fff;
+    margin: 0 8px;
+    width: 128px;
+    height: 128px;
+}
+
+.table .details {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+}
+
+.table .details :first-child {
+    flex: 1;
+}
+
+.table .registrations-container {
+    display: flex;
+    flex-direction: column;
+    background: #ccc;
+}
+
+.table .registrations-container .registration {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+}
+
+.table .registrations-container .registration:nth-child(even) {
+    background-color: #fafafa;
+}
+
+.table .pink {
+    font-weight: 700;
+    color: #EA5888;
 }

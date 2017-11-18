@@ -4,6 +4,10 @@ const update = () => {
         .append( sessionStorage.getItem( 'sos_data' ) );
 }
 
+$( '.info' )
+    .click( () => $( '.info' )
+        .slideDown() );
+
 update();
 
 //TODO session dus niet gedeeld. jammer. morgen alternatief schrijven
