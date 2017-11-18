@@ -71,10 +71,11 @@ const refreshData = () => {
             .empty()
             .append( newTables.children() );
 
-        if( config.masonry )
+        if( config.masonry ) {
             $( '.consult-tables-container' )
-            .masonry( 'appended', newTables.children() );
-
+                .masonry( 'destroy' );
+            enableMasonry();
+        }
         setNewTime();
     } );
 }
