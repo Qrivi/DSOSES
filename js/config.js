@@ -5,7 +5,8 @@ let config = {
     showQueueNotification: 3,
     autoRefresh: true,
     fixImages: true,
-    masonry: true
+    masonry: true,
+    moreColumns: true
 };
 
 const saveConfig = () => {
