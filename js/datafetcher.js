@@ -1,17 +1,19 @@
+var dataset;
 let user;
-let dataset;
-let firstRun = true;
+let enabled;
 
 const checkAuth = () => {
     $.get( 'https://sos.devine-tools.be/student/consulten', ( data ) => {
-            var title = $( data )
+            console.log( 'Updating' );
+
+            let title = $( data )
                 .filter( 'title' )
                 .text();
 
             if( title === 'Devine SOS tool - login' )
-                return createError( 'Not logged in' );
+                return makeError( 'Not logged in' );
             if( title !== 'Devine SOS tool - overzicht consulten' )
-                return createError( 'Something went wrong' );
+                return makeError( 'Something went wrong' );
             if( !user )
                 $.get( 'https://sos.devine-tools.be/student/profiel', ( data ) => {
                     user = $( data )
@@ -21,22 +23,28 @@ const checkAuth = () => {
                     console.log( 'Fetched user: ', user );
                 } );
 
-            //fetchConsultation( 'http://sandbox.krivi.be/sos/' ); //TODO remove hier en in manifest
-            $( data )
-                .find( '.overview-table-container a' )
-                .each( function() {
+            enabled = true;
+            dataset = { empty: true };
+
+            let links = $( data )
+                .find( '.overview-table-container a' );
+            if( links.length )
+                links.each( function() {
                     fetchConsultation( this.href );
                 } );
+            else
+                enabled = false;
         } )
-        .fail( createError );
+        .fail( makeError );
 
     setTimeout( () => {
-        if( config.enabled )
+        if( enabled )
             checkAuth();
     }, config.refreshRate );
 }
 
 const fetchConsultation = ( href ) => {
+    console.log( 'Consultations found' );
     $.get( href, ( data ) => {
         $( data )
             .find( '.registrations-container .registration > span' )
@@ -44,22 +52,18 @@ const fetchConsultation = ( href ) => {
                 let row = $( this )
                     .text();
                 if( row
-                    .includes( user ) )
+                    .includes( user ) ) {
+                    enabled = true;
                     parseConsultation( this.closest( 'article.table' ), row );
+                } else {
+                    enabled = false;
+                    console.log( 'Not subscribed to any consultation' );
+                }
             } );
     } );
 }
 
 const parseConsultation = ( consultation, row ) => {
-    if( dataset.error )
-        delete dataset.error;
-
-    if( firstRun ) {
-        firstRun = false;
-        config.enabled = true;
-        saveConfig();
-    }
-
     let lecturer = $( consultation )
         .find( '.table-name span' )
         .first()
@@ -68,6 +72,8 @@ const parseConsultation = ( consultation, row ) => {
         .replace( /\W/g, '' )
         .toLowerCase();
     let position = parseInt( row.substr( 0, row.indexOf( '.' ) ) ) - 1;
+
+    console.log( 'Subscribed to: ' + lecturer );
 
     if( config.showNotifications && dataset.position && dataset.position !== position )
         if( config.showAllNotifications )
@@ -78,10 +84,11 @@ const parseConsultation = ( consultation, row ) => {
     dataset = { id: id, lecturer: lecturer, position: position, html: consultation };
 }
 
-const createError = ( message ) => {
+const makeError = ( message ) => {
     if( !message )
         message = 'Could not connect';
     dataset = { error: message };
+    console.log( 'Error: ' + message );
 }
 
 const showNotification = ( lecturer, position ) => {
@@ -94,7 +101,7 @@ const showNotification = ( lecturer, position ) => {
     chrome.notifications.create( {
         type: 'basic',
         iconUrl: '../img/icon.png',
-        title: 'Devine SOS',
+        title: 'Wachtrijupdate consult',
         message: message
     } );
 }

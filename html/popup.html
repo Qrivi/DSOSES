@@ -13,7 +13,7 @@
 
 <body id="popup">
     <header class="top-bar">
-        <svg class="logo" viewBox="0 0 100 213">
+        <svg class="link logo" data-link="https://sos.devine-tools.be" viewBox="0 0 100 213">
             <path d="M97.2302022,59.7082767 C89.8727726,54.1754831 21.3809171,2.79041854 12.1598707,0.134743921 C4.378628,-2.10458196 11.1040701,24.1685163 18.770029,34.274511 L65.816607,80.0214506 L65.9211088,157.110659 L50.0359946,172.479899 L33.9808574,157.315516 L33.8547916,87.9635931 L11.5237363,64.7368074 C11.5237363,64.7368074 0.0277007532,51.1175592 0.0277007532,70.6992199 L0.0277007532,159.102829 C0.0277007532,159.102829 -0.910327976,166.232179 8.13074292,175.833082 L39.1959985,206.859357 C39.1959985,206.859357 48.9719001,219.289274 60.8793081,206.859357 C73.2246287,193.970792 91.8831896,175.893627 91.8831896,175.893627 C91.8831896,175.893627 99.7208302,169.62849 99.7208302,159.616216 C99.7208302,149.6056 99.9538859,70.0854788 99.9538859,70.0854788 C99.9538859,70.0854788 100.490495,62.7487837 97.880436,60.2034166 C97.6681148,59.996901 97.459111,59.8368306 97.2302022,59.7082767 Z"/>
         </svg>
         <div>
@@ -27,20 +27,34 @@
     </header>
 
     <main>
-        <article class="notloggedin" style="display:none">
+        <article class="login">
             <h1>Hello,</h1>
             <h2>Meld je aan voor het Devine-studentenopvolgingssysteem.</h2>
-            <button class="login">Aanmelden</button>
+            <button class="link login" data-link="https://sos.devine-tools.be/login">Aanmelden</button>
         </article>
 
-        <article class="poweredoff" style="display:none">
+        <article class="empty">
             <h1>DASHBOARD</h1>
             <p>Je bent op dit moment niet ingeschreven voor een consult of <span class="info">je hebt SOS uigeschakeld</span>.</p>
             <p class="info">Je kan SOS manueel uitgeschakelen om achtergrondprocessen te stoppen, wat zuiniger is voor je processor en dus ook je batterij.</p>
-            <button class="inschrijven">Inschrijven</button>
+            <button class="link inschrijven" data-link="https://sos.devine-tools.be/student/consulten">Inschrijven</button>
         </article>
 
-        <article class="table" style="display:block">
+        <article class="error">
+            <h1>Oeps! Kapot! Alarm!</h1>
+            <p>Er loopt iets mis bij het ophalen van de data. Je mag me zeker iets laten weten als dit blijft gebeuren!</p>
+            <div id="contact">
+                <svg class="link" data-link="https://twitter.com/Qrivi" viewBox="0 0 250 203.1">
+                    <path d="M78.6,203.1c94.3,0,145.9-78.2,145.9-145.9c0-2.2,0-4.4-0.1-6.6c10-7.3,18.7-16.3,25.6-26.5c-9.4,4.1-19.3,6.9-29.5,8.1 c10.7-6.4,18.7-16.5,22.5-28.4c-10.1,6-21.1,10.2-32.6,12.4c-19.4-20.7-51.9-21.7-72.6-2.2c-13.3,12.5-19,31.2-14.8,49 C81.9,60.9,43.4,41.4,17.4,9.4C3.8,32.8,10.7,62.8,33.3,77.8c-8.2-0.2-16.1-2.4-23.3-6.4c0,0.2,0,0.4,0,0.6	c0,24.4,17.2,45.4,41.2,50.3c-7.6,2.1-15.5,2.4-23.2,0.9c6.7,20.9,26,35.2,47.9,35.6c-18.2,14.3-40.6,22-63.7,22
+                	c-4.1,0-8.2-0.3-12.2-0.7C23.5,195.2,50.7,203.1,78.6,203.1"/>
+                </svg>
+                <svg class="link" data-link="https://m.me/Qrivi" viewBox="0 0 224 225.2">
+                    <path d="M105,0c4.7,0,9.3,0,14,0c3.1,0.5,6.2,1,9.3,1.4c15.5,2.4,30.2,7,43.6,15.2c26.9,16.3,44.2,39.5,50.3,70.6 c0.6,3.2,1.2,6.5,1.8,9.8c0,5.3,0,10.7,0,16c-0.5,2.6-1,5.2-1.5,7.8c-5.5,29.6-21.1,52.6-46.1,69C148,208.3,117,213.1,84,205.6 c-3.7-0.8-6.7-0.6-10,1.4c-9,5.3-18.2,10.4-27.3,15.6c-1.5,0.9-3.1,1.6-5.5,2.7c0-13.8,0-26.8,0-39.1c-0.8-1-1.1-1.4-1.4-1.7 c-0.9-0.8-1.8-1.5-2.7-2.3C16.9,164.7,4.3,143,1,116.3c-0.1-1.1-0.6-2.2-1-3.3c0-5.3,0-10.7,0-16c0.3-1.3,0.8-2.5,1-3.8 c1-10.7,4-21,8.8-30.6c16.9-34,44.8-53.1,81.6-60.4C95.8,1.3,100.4,0.7,105,0z M42,138c1.5-0.6,3.1-1.1,4.6-1.8 c11.2-6.1,22.5-12.3,33.7-18.4c4.6-2.5,9.3-5,14.1-7.6c10.3,9.5,18.9,20.2,29.1,29.6c1-0.9,1.7-1.5,2.2-2.1 c15.3-16.2,30.6-32.4,45.8-48.7c3.6-3.9,7-7.9,10.5-11.9l0.1,0.1c-2.6,1.1-5.2,2.1-7.7,3.4c-13.5,7.3-26.9,14.7-40.4,22 c-1.6,0.9-3.2,1.6-5,2.4c-10.2-9.3-18.6-20.1-29.1-29c-1.4,1.3-2.4,2.1-3.3,3.1C79.8,96.9,63,114.7,46.3,132.6 C44.7,134.2,43.4,136.2,42,138l-0.2,0.3L42,138z"/>
+                </svg>
+            </div>
+        </article>
+
+        <!-- <article class="table" style="display:block">
             <div class="table-name">
                 <span>Jynse (DES) &amp; Wouter (DEV)</span>
             </div>
@@ -67,7 +81,7 @@
 
                 </div>
             </div>
-        </article>
+        </article> -->
     </main>
 
     <script src="../js/jquery-3.2.1.min.js"></script>

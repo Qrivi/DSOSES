@@ -1,13 +1,30 @@
-const update = () => {
-    console.log( 'going for it' );
-    $( 'body' )
-        .append( sessionStorage.getItem( 'sos_data' ) );
-}
+let bg;
 
 $( '.info' )
     .click( () => $( '.info' )
         .slideDown() );
 
-update();
+$( '.link' )
+    .click( function() {
+        chrome.tabs.create( {
+            url: $( this )
+                .attr( 'data-link' )
+        } );
+    } );
 
-//TODO session dus niet gedeeld. jammer. morgen alternatief schrijven
+
+const init = () => {
+    bg = chrome.extension.getBackgroundPage();
+
+    if( !bg.dataset || bg.dataset.error === "Could not connect" )
+        $( 'article.error' )
+        .show();
+    else if( bg.dataset.error && bg.dataset.error === "Not logged in" )
+        $( 'article.login' )
+        .show();
+    else if( bg.dataset.empty )
+        $( 'article.empty' )
+        .show();
+}
+
+init();

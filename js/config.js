@@ -1,21 +1,29 @@
 let config = {
-    enabled: false,
-    refreshRate: 10000,
+    refreshRate: 12345,
     showNotifications: true,
     showAllNotifications: false,
-    showQueueNotification: 3
+    showQueueNotification: 3,
+    autoRefresh: true,
+    fixImages: true,
+    masonry: true
 };
 
 const saveConfig = () => {
+    console.log( 'Saving configuration' );
+    console.log( config );
     chrome.storage.sync.set( {
-        'sos_config': config
+        'sosconfig': config
     } );
 }
 
 const loadConfig = () => {
-    chrome.storage.sync.get( 'sos_config', ( obj ) => {
-        if( obj )
-            Object.keys( obj )
-            .forEach( ( key ) => config[ key ] = obj.key );
+    chrome.storage.sync.get( 'sosconfig', ( obj ) => {
+        if( obj.sosconfig ) {
+            Object.keys( obj.sosconfig )
+                .forEach( ( key ) => {
+                    config[ key ] = obj.sosconfig[ key ];
+                } );
+        }
+        saveConfig();
     } );
 }

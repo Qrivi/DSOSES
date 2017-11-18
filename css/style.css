@@ -68,7 +68,8 @@
     min-width: 900px;
 }
 
-main article:not(.table) {
+main>article:not(.table) {
+    display: none;
     padding: 20px;
 }
 
@@ -89,7 +90,7 @@ h2 {
     line-height: 1.4em;
 }
 
-button:not(.icon) {
+button.link {
     background-color: #00ffff;
     color: #000;
     transition: background-color .2s ease-in, color .2s ease-in;
@@ -128,6 +129,26 @@ span.info {
 p.info {
     display: none;
     color: #AAA;
+}
+
+#contact {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#contact svg {
+    cursor: pointer;
+    fill: #000;
+    width: 50px;
+    height: 100%;
+    padding: 8px;
+}
+
+#contact svg:hover {
+    fill: #74FBFD;
 }
 
 /*=*/

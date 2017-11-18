@@ -8,8 +8,11 @@
     },
 
     "content_scripts": [{
-        "matches": ["*://sos.devine-tools.be/student/consulten", "*://sandbox.krivi.be/sos*"],
-        "js": ["js/jquery-3.2.1.min.js", "js/listener.js"]
+        "matches": ["*://sos.devine-tools.be/student"],
+        "js": ["js/listener-login.js"]
+    }, {
+        "matches": ["*://sos.devine-tools.be/student/registreer/consult/*", "http://sandbox.krivi.be/sos/"],
+        "js": ["js/lib/jquery-3.2.1.min.js", "js/lib/masonry.pkgd.min.js", "js/listener-consult.js"]
     }],
 
     "browser_action": {
@@ -20,7 +23,7 @@
     "permissions": [
         "storage",
         "cookies",
-        "*://sos.devine-tools.be/*",
-        "http://sandbox.krivi.be/sos/"
+        "notifications",
+        "*://sos.devine-tools.be/*"
     ]
 }
