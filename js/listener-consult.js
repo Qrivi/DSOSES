@@ -85,7 +85,7 @@ const setNewTime = () => {
     let m = d.getMinutes();
     let s = d.getSeconds();
     if( m < 10 )
-        s = "0" + m;
+        m = "0" + m;
     if( s < 10 )
         s = "0" + s;
 
