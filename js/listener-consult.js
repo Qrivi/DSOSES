@@ -9,8 +9,8 @@ chrome.storage.sync.get( 'sosconfig', ( obj ) => {
     if( config.masonry )
         enableMasonry();
     if( config.autoRefresh ) {
-        setInterval( refreshData, config.refreshRate );
         setNewTime();
+        setInterval( refreshData, config.refreshRate );
         $( '.inline-header h1' )
             .text( 'OVERZICHT TAFELS' );
         $( '.inline-header' )
