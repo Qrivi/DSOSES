@@ -9,7 +9,7 @@ chrome.storage.sync.get( 'sosconfig', ( obj ) => {
     if( config.moreColumns )
         addColumns();
     if( config.masonry )
-        setTimeout( enableMasonry, 500 );
+        setTimeout( enableMasonry, 500 ); // better: wait till images/fixImages() are loaded/ready
     if( config.autoRefresh ) {
         setNewTime();
         setInterval( refreshData, config.refreshRate );
@@ -71,6 +71,9 @@ const enableMasonry = () => {
 }
 
 const refreshData = () => {
+    const position = $( window )
+        .scrollTop();
+
     $.get( window.location.href, ( data ) => {
         let newTables = $( data )
             .find( '.consult-tables-container' );
@@ -86,12 +89,16 @@ const refreshData = () => {
                 .masonry( 'destroy' );
             enableMasonry();
         }
+
+        $( window )
+            .scrollTop( position );
+
         setNewTime();
     } );
 }
 
 const setNewTime = () => {
-    let d = new Date();
+    const d = new Date();
     let h = d.getHours();
     let m = d.getMinutes();
     let s = d.getSeconds();
