@@ -4,6 +4,8 @@ let config = {
     showAllNotifications: false,
     showQueueNotification: 3,
     autoRefresh: true,
+    collapsibleTables: 'disabled', //disabled, default, compact
+    hideImages: false,
     fixImages: true,
     masonry: true,
     moreColumns: true

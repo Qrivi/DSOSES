@@ -10,10 +10,9 @@
     padding: 0;
 }
 
-#popup {
+body {
     width: 400px;
     font-family: 'Roboto', sans-serif;
-    font-size: .8em;
     font-size: 1.2em;
 }
 

@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Pop-up page">
+    <meta name="author" content="Kristof Dewilde">
+
+    <title>SOS</title>
+
+    <link rel="stylesheet" href="../css/options.css">
+</head>
+
+<body>
+</body>
+<main>
+
+    <label class="switch unchecked">
+        Notificaties voor wachtrijupdates
+        <input id="showNotifications" type="checkbox">
+    </label>
+
+    <div class="sub">
+        <label class="bullet unchecked">
+            <input id="showAllNotifications" name="notifications" type="radio">
+            Toon alle notificaties
+        </label>
+        <label class="bullet checked">
+            <input id="showQueueNotifications" name="notifications" type="radio">
+            Vanaf <input type="number" min="0" max="25" step="1" value="3"> medestudenten voor me
+        </label>
+    </div>
+
+    <label class="switch unchecked">
+        Profielfoto's verbergen
+        <span>Toon geen profielfoto's voor lectoren, enkel de wachtrij</span>
+        <input id="hideImages" type="checkbox">
+    </label>
+
+    <label class="switch unchecked disabled">
+        Placeholders voor ontbrekende profielfoto's
+        <span>Gebruik de ingebouwde placeholders als voor lectoren zonder profielfoto</span>
+        <input id="fixImages" type="checkbox">
+    </label>
+
+    <label id="collapsibleTables">
+        Opvouwbare tafels
+        <span>Toon of verberg wachtrijen door op de hoofding te klikken</span>
+        <div class="dropdown">
+            <span>compact</span>
+            <select>
+                <option value="disabled">uit</option>
+                <option value="enabled">vouwbaar</option>
+                <option value="compact">compact</option>
+            </select>
+        </div>
+    </label>
+
+    <label class="switch unchecked">
+        Automatisch bijwerken van wachtrijen
+        <span>Update de wachtrijen live zonder dat de pagina vernieuwd moet worden</span>
+        <input id="autoRefresh" type="checkbox">
+    </label>
+
+    <label class="switch unchecked">
+        Meer kolommen voor tafels
+        <span>Gebruik tot vijf kolommen, afhankelijk van de vensterbreedte</span>
+        <input id="moreColumns" type="checkbox">
+    </label>
+
+    <label class="switch unchecked">
+        Puzzellay-out voor tafels
+        <span>Schik alle tafels volgens een cascading grid lay-out</span>
+        <input id="masonry" type="checkbox">
+    </label>
+
+</main>
+
+<footer>
+    <a href="https://twitter.com/Qrivi">
+    <svg viewBox="0 0 250 203.1">
+        <path d="M78.6,203.1c94.3,0,145.9-78.2,145.9-145.9c0-2.2,0-4.4-0.1-6.6c10-7.3,18.7-16.3,25.6-26.5c-9.4,4.1-19.3,6.9-29.5,8.1 c10.7-6.4,18.7-16.5,22.5-28.4c-10.1,6-21.1,10.2-32.6,12.4c-19.4-20.7-51.9-21.7-72.6-2.2c-13.3,12.5-19,31.2-14.8,49 C81.9,60.9,43.4,41.4,17.4,9.4C3.8,32.8,10.7,62.8,33.3,77.8c-8.2-0.2-16.1-2.4-23.3-6.4c0,0.2,0,0.4,0,0.6	c0,24.4,17.2,45.4,41.2,50.3c-7.6,2.1-15.5,2.4-23.2,0.9c6.7,20.9,26,35.2,47.9,35.6c-18.2,14.3-40.6,22-63.7,22
+        c-4.1,0-8.2-0.3-12.2-0.7C23.5,195.2,50.7,203.1,78.6,203.1"/>
+    </svg>
+</a>
+</footer>
+
+<script src="../js/lib/jquery-3.2.1.min.js"></script>
+<script src="../js/options.js"></script>
+
+</html>

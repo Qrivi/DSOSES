@@ -20,6 +20,11 @@
         "default_popup": "html/popup.html"
     },
 
+    "options_ui": {
+        "page": "html/options.html",
+        "chrome_style": true
+    },
+
     "permissions": [
         "storage",
         "cookies",

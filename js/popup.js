@@ -12,6 +12,8 @@ $( '.link' )
         } );
     } );
 
+$( '.options' )
+    .click( () => chrome.runtime.openOptionsPage() );
 
 const init = () => {
     bg = chrome.extension.getBackgroundPage();
