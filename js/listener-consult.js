@@ -4,12 +4,12 @@ let config;
 chrome.storage.sync.get( 'sosconfig', ( obj ) => {
     config = obj.sosconfig;
 
-    if( config.moreColumns )
-        addColumns();
     if( config.fixImages )
         fixImages();
+    if( config.moreColumns )
+        addColumns();
     if( config.masonry )
-        enableMasonry();
+        setTimeout( enableMasonry, 500 );
     if( config.autoRefresh ) {
         setNewTime();
         setInterval( refreshData, config.refreshRate );
@@ -40,15 +40,6 @@ const addColumns = () => {
         .append( '<style>@media (min-width: 3000px) and (max-width: 5555px){.consult-tables-container .table{width:16%}}</style>' );
 }
 
-const enableMasonry = () => {
-    $( '.consult-tables-container' )
-        .append( '<div class="masonry-gutter" style="width:10%"></div>' )
-        .masonry( {
-            gutter: '.masonry-gutter',
-            percentPosition: true
-        } );
-}
-
 const fixImages = ( source ) => {
     if( !source )
         source = $( '.consult-tables-container' );
@@ -68,6 +59,15 @@ const fixImages = ( source ) => {
         } );
 
     return source;
+}
+
+const enableMasonry = () => {
+    $( '.consult-tables-container' )
+        .append( '<div class="masonry-gutter" style="width:10%"></div>' )
+        .masonry( {
+            gutter: '.masonry-gutter',
+            percentPosition: true
+        } );
 }
 
 const refreshData = () => {
