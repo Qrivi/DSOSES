@@ -2,12 +2,12 @@ let config = {
     refreshRate: 12345,
     showNotifications: true,
     showAllNotifications: false,
-    showQueueNotification: 3,
+    showQueueNotifications: 3,
     autoRefresh: true,
     collapsibleTables: 'disabled', //disabled, default, compact
     hideImages: false,
     fixImages: true,
-    masonry: true,
+    enableMasonry: true,
     moreColumns: true
 };
 

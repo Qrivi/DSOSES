@@ -14,20 +14,21 @@
 <body>
 </body>
 <main>
+    <div class="loading">&nbsp;</div>
 
     <label class="switch unchecked">
-        Notificaties voor wachtrijupdates
+        Meldingen voor wachtrijupdates
         <input id="showNotifications" type="checkbox">
     </label>
 
     <div class="sub">
-        <label class="bullet unchecked">
-            <input id="showAllNotifications" name="notifications" type="radio">
-            Toon alle notificaties
-        </label>
         <label class="bullet checked">
+            <input id="showAllNotifications" name="notifications" type="radio">
+            Toon alle meldingen
+        </label>
+        <label class="bullet unchecked">
             <input id="showQueueNotifications" name="notifications" type="radio">
-            Vanaf <input type="number" min="0" max="25" step="1" value="3"> medestudenten voor me
+            Vanaf <input id="queue" type="number" min="0" max="25" step="1"> medestudenten voor me
         </label>
     </div>
 
@@ -46,8 +47,8 @@
     <label id="collapsibleTables">
         Opvouwbare tafels
         <span>Toon of verberg wachtrijen door op de hoofding te klikken</span>
-        <div class="dropdown">
-            <span>compact</span>
+        <div class="dropdown off">
+            <span>uit</span>
             <select>
                 <option value="disabled">uit</option>
                 <option value="enabled">vouwbaar</option>
@@ -58,7 +59,7 @@
 
     <label class="switch unchecked">
         Automatisch bijwerken van wachtrijen
-        <span>Update de wachtrijen live zonder dat de pagina vernieuwd moet worden</span>
+        <span>Update de wachtrijen live zonder de pagina te moeten vernieuwen</span>
         <input id="autoRefresh" type="checkbox">
     </label>
 
@@ -70,8 +71,8 @@
 
     <label class="switch unchecked">
         Puzzellay-out voor tafels
-        <span>Schik alle tafels volgens een cascading grid lay-out</span>
-        <input id="masonry" type="checkbox">
+        <span>Schik alle tafels volgens een cascading grid</span>
+        <input id="enableMasonry" type="checkbox">
     </label>
 
 </main>

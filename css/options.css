@@ -12,6 +12,16 @@ body {
     margin: 0;
 }
 
+.loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+    background: #FFF;
+}
+
 label {
     display: block;
     position: relative;
@@ -49,11 +59,11 @@ input[type=number] {
     border-bottom: solid 1px #ccc;
     text-align: center;
     width: 22px;
-    transition: width .5s ease-out;
+    transition: width .25s ease-out;
 }
 
 input[type=number]:focus, input[type=number]:hover {
-    width: 50px;
+    width: 40px;
 }
 
 input[type=number]::-webkit-inner-spin-button {

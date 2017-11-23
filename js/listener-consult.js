@@ -11,7 +11,7 @@ chrome.storage.sync.get( 'sosconfig', ( obj ) => {
         fixImages();
     if( config.moreColumns )
         addColumns();
-    if( config.masonry )
+    if( config.enableMasonry )
         setTimeout( enableMasonry, 500 ); // better: wait till images/fixImages() are loaded/ready
     if( config.autoRefresh ) {
         setNewTime();
@@ -91,7 +91,7 @@ const refreshData = () => {
             .empty()
             .append( newTables.children() );
 
-        if( config.masonry ) {
+        if( config.enableMasonry ) {
             $( '.consult-tables-container' )
                 .masonry( 'destroy' );
             enableMasonry();
