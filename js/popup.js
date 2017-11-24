@@ -18,6 +18,9 @@ $( '.options' )
 const init = () => {
     bg = chrome.extension.getBackgroundPage();
 
+    $( 'article.table' )
+        .remove();
+
     if( !bg.dataset || bg.dataset.error === "Could not connect" )
         $( 'article.error' )
         .show();
@@ -27,6 +30,9 @@ const init = () => {
     else if( bg.dataset.empty )
         $( 'article.empty' )
         .show();
+    else if( bg.dataset.html )
+        $( 'main' )
+        .append( bg.dataset.html );
 }
 
 init();

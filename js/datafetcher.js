@@ -57,7 +57,6 @@ const fetchConsultation = ( href ) => {
                     parseConsultation( this.closest( 'article.table' ), row );
                 } else {
                     enabled = false;
-                    console.log( 'Not subscribed to any consultation' );
                 }
             } );
     } );
