@@ -54,7 +54,7 @@ const fixImages = ( source ) => {
     source.find( 'img' )
         .each( function() {
             if( $( this )
-                .attr( 'src' ) === './DevineSOStool-registreer_files/saved_resource' ) {
+                .attr( 'src' ) === '/images/lecturers/' ) {
                 let no = $( this )
                     .attr( 'alt' )
                     .length;

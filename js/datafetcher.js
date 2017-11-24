@@ -77,7 +77,7 @@ const parseConsultation = ( consultation, row ) => {
     if( config.showNotifications && dataset.position && dataset.position !== position )
         if( config.showAllNotifications )
             showNotification( lecturere, position );
-        else if( config.showQueueNotification >= position )
+        else if( config.showQueueNotifications >= position )
         showNotification( lecturere, position );
 
     dataset = { id: id, lecturer: lecturer, position: position, html: consultation };

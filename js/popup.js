@@ -21,10 +21,7 @@ const init = () => {
     $( 'article.table' )
         .remove();
 
-    if( !bg.dataset || bg.dataset.error === "Could not connect" )
-        $( 'article.error' )
-        .show();
-    else if( bg.dataset.error && bg.dataset.error === "Not logged in" )
+    if( bg.dataset.error && bg.dataset.error === "Not logged in" )
         $( 'article.login' )
         .show();
     else if( bg.dataset.empty )
@@ -33,6 +30,9 @@ const init = () => {
     else if( bg.dataset.html )
         $( 'main' )
         .append( bg.dataset.html );
+    else
+        $( 'article.error' )
+        .show();
 }
 
 init();
