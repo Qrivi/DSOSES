@@ -16,64 +16,72 @@
 <main>
     <div class="loading">&nbsp;</div>
 
-    <label class="switch unchecked">
-        Meldingen voor wachtrijupdates
+    <fieldset>
         <input id="showNotifications" type="checkbox">
-    </label>
+        <label for="showNotifications" class="switch off">
+            Meldingen voor wachtrijupdates
+        </label>
 
-    <div class="sub">
-        <label class="bullet checked">
+        <div id="notifications">
             <input id="showAllNotifications" name="notifications" type="radio">
-            Toon alle meldingen
-        </label>
-        <label class="bullet unchecked">
+            <label for="showAllNotifications" class="bullet off">
+                Toon alle meldingen
+            </label>
+
             <input id="showQueueNotifications" name="notifications" type="radio">
-            Vanaf <input id="queue" type="number" min="0" max="25" step="1"> medestudenten voor me
-        </label>
-    </div>
-
-    <label class="switch unchecked">
-        Profielfoto's verbergen
-        <span>Toon geen profielfoto's voor lectoren, enkel de wachtrij</span>
-        <input id="hideImages" type="checkbox">
-    </label>
-
-    <label class="switch unchecked disabled">
-        Placeholders voor ontbrekende profielfoto's
-        <span>Gebruik de ingebouwde placeholders als voor lectoren zonder profielfoto</span>
-        <input id="fixImages" type="checkbox">
-    </label>
-
-    <label id="collapsibleTables">
-        Opvouwbare tafels
-        <span>Toon of verberg wachtrijen door op de hoofding te klikken</span>
-        <div class="dropdown off">
-            <span>uit</span>
-            <select>
-                <option value="disabled">uit</option>
-                <option value="enabled">vouwbaar</option>
-                <option value="compact">compact</option>
-            </select>
+            <label class="bullet off">
+                Vanaf <input id="queue" type="number" min="0" max="25" step="1" val="3"> medestudenten voor me
+            </label>
         </div>
-    </label>
+    </fieldset>
 
-    <label class="switch unchecked">
-        Automatisch bijwerken van wachtrijen
-        <span>Update de wachtrijen live zonder de pagina te moeten vernieuwen</span>
+    <fieldset>
+        <input id="hideImages" type="checkbox">
+        <label for="hideImages" class="switch off">
+            Profielfoto's verbergen
+            <span>Toon geen profielfoto's voor lectoren, enkel de wachtrij</span>
+        </label>
+    </fieldset>
+
+    <fieldset class="disabled">
+        <input id="fixImages" type="checkbox">
+        <label for="fixImages" class="switch off">
+            Placeholders voor ontbrekende profielfoto's
+            <span>Gebruik de ingebouwde placeholders als voor lectoren zonder profielfoto</span>
+        </label>
+    </fieldset>
+
+    <fieldset>
+        <input id="collapsibleTables" type="checkbox">
+        <label for="collapsibleTables" class="switch off">
+            Opvouwbare tafels
+            <span>Toon of verberg wachtrijen door op de hoofding te klikken</span>
+        </label>
+    </fieldset>
+
+    <fieldset>
         <input id="autoRefresh" type="checkbox">
-    </label>
+        <label for="autoRefresh" class="switch off">
+            Automatisch bijwerken van wachtrijen
+            <span>Update de wachtrijen live zonder de pagina te moeten vernieuwen</span>
+        </label>
+    </fieldset>
 
-    <label class="switch unchecked">
-        Meer kolommen voor tafels
-        <span>Gebruik tot vijf kolommen, afhankelijk van de vensterbreedte</span>
+    <fieldset>
         <input id="moreColumns" type="checkbox">
-    </label>
+        <label for=moreColumns class="switch off">
+            Meer kolommen voor tafels
+            <span>Gebruik tot vijf kolommen, afhankelijk van de vensterbreedte</span>
+        </label>
+    </fieldset>
 
-    <label class="switch unchecked">
-        Puzzellay-out voor tafels
-        <span>Schik alle tafels volgens een cascading grid</span>
+    <fieldset>
         <input id="enableMasonry" type="checkbox">
-    </label>
+        <label for="enableMasonry" class="switch off">
+            Puzzellay-out voor tafels
+            <span>Schik alle tafels volgens een cascading grid</span>
+        </label>
+    </fieldset>
 
 </main>
 

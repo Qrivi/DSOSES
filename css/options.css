@@ -22,26 +22,32 @@ body {
     background: #FFF;
 }
 
+fieldset {
+    border: none;
+    outline: none;
+    margin: 0;
+    padding: 0;
+    border-top: solid 1px #efefef;
+}
+
+fieldset:first-of-type {
+    border-top: none;
+}
+
+fieldset:first-of-type label {
+    padding: 26px 20px 15px;
+}
+
+#notifications label {
+    padding: 12px 20px;
+    text-indent: 20px;
+}
+
 label {
     display: block;
     position: relative;
-    border-top: solid 1px #efefef;
     padding: 15px 20px;
     cursor: pointer;
-}
-
-.sub {
-    padding-bottom: 15px;
-}
-
-.sub label {
-    border: none;
-    padding: 8px 30px !important;
-}
-
-label:first-of-type {
-    border-top: none;
-    padding: 24px 20px;
 }
 
 label>span {
@@ -103,7 +109,7 @@ footer a:hover svg {
     transition: transform .5s cubic-bezier(.68, -.55, .265, 1.55);
 }
 
-.bullet.checked:before {
+.bullet.on:before {
     transform: scale(1);
 }
 
@@ -117,11 +123,11 @@ footer a:hover svg {
     border-radius: 5px;
 }
 
-.bullet.checked:after {
+.bullet.on:after {
     background: #74FBFD;
 }
 
-.bullet.unchecked:after {
+.bullet.off:after {
     background: #EA5888;
 }
 
@@ -135,11 +141,11 @@ footer a:hover svg {
     border-radius: 8px;
 }
 
-.switch.checked:before {
+.switch.on:before {
     background: #74FBFD;
 }
 
-.switch.unchecked:before {
+.switch.off:before {
     background: #EA5888;
 }
 
@@ -154,15 +160,15 @@ footer a:hover svg {
     transition: top .5s cubic-bezier(.68, -.55, .265, 1.55);
 }
 
-.switch.checked:after {
+.switch.on:after {
     top: 25px;
 }
 
-.switch.unchecked:after {
+.switch.off:after {
     top: 34px;
 }
 
-.disabled {
+.disabled label {
     opacity: .33;
     cursor: default;
 }

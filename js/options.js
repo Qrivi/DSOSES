@@ -16,7 +16,7 @@ chrome.storage.sync.get( 'sosconfig', ( obj ) => {
         .trigger( 'change' );
 
     $( '#queue' )
-        .val( 'checked', config.showQueueNotifications );
+        .val( config.showQueueNotifications );
 
     $( '#autoRefresh' )
         .prop( 'checked', config.autoRefresh )
@@ -40,62 +40,52 @@ chrome.storage.sync.get( 'sosconfig', ( obj ) => {
 
 
     $( '.loading' )
-        .fadeOut();
+        .delay( 500 )
+        .fadeOut( 500 );
 } );
 
 $( '.disabled' )
     .click( () => false );
 
-$( 'select' )
+$( '#hideImages' )
     .change( () => {
-        const txt = $( 'select option:selected' )
-            .text();
-
-        if( txt === 'uit' )
-            $( '.dropdown' )
-            .attr( 'class', 'dropdown off' );
-        else
-            $( '.dropdown' )
-            .attr( 'class', 'dropdown on' );
-
-        $( '.dropdown span' )
-            .text( txt );
-
-        return false;
+        $( '#fiximages' )
+            .parent()
+            .attr( 'class', $( this )
+                .is( ':checked' ) ? '' : 'disabled' );
     } );
 
-$( '#collapsibleTables' )
-    .click( () => {
-        $( 'select option:selected' )
-            .prop( 'selected', false )
-            .next()
-            .prop( 'selected', true );
-
-        $( 'select' )
-            .trigger( 'change' );
-
-        return false;
-    } );
-
-$( 'input[type=number]' )
+$( '#queue' )
     .focus( () => {
         $( '#showQueueNotifications' )
             .prop( 'checked', true )
             .trigger( 'change' );
+    } )
+    .on( 'input', () => {
+        let val = parseInt( $( '#queue' ).val() );
+        if( isNaN( val ) || val < 0 || val > 25 )
+            val = 3;
+        $( '#queue' ).val( val );
     } );
 
 $( 'input[type=checkbox], input[type=radio]' )
     .change( function() {
-        if( $( this )
-            .attr( 'type' ) === 'radio' )
-            $( '.bullet' )
-            .attr( 'class', 'bullet unchecked' );
-        $( this )
-            .parent()
-            .removeClass( 'checked unchecked' )
-            .addClass( $( this )
-                .is( ':checked' ) ? 'checked' : 'unchecked' );
+        if( $( this ).attr( 'type' ) === 'radio' )
+            $( this )
+            .siblings( '[type=radio]' )
+            .each( function() {
+                toggle( this );
+            } );
+        toggle( this );
     } );
+
+const toggle = ( button ) => {
+    $( button )
+        .next( 'label' )
+        .removeClass( 'on off' )
+        .addClass( $( button )
+            .is( ':checked' ) ? 'on' : 'off' );
+}
 
 const checkAndSync = () => {
     console.log( 'syncing' )

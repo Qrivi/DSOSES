@@ -4,11 +4,11 @@ let config = {
     showAllNotifications: false,
     showQueueNotifications: 3,
     autoRefresh: true,
-    collapsibleTables: 'disabled', //disabled, default, compact
     hideImages: false,
     fixImages: true,
     enableMasonry: true,
-    moreColumns: true
+    moreColumns: 'disabled', //disabled, always, smart
+    collapsibleTables: 'disabled', //disabled, default, compact
 };
 
 const saveConfig = () => {
