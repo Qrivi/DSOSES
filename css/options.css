@@ -35,11 +35,11 @@ fieldset:first-of-type {
 }
 
 fieldset:first-of-type label {
-    padding: 26px 20px 15px;
+    padding: 24px 20px 22px;
 }
 
 #notifications label {
-    padding: 12px 20px;
+    padding: 8px 20px 12px;
     text-indent: 20px;
 }
 

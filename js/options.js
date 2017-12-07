@@ -44,15 +44,27 @@ chrome.storage.sync.get( 'sosconfig', ( obj ) => {
         .fadeOut( 500 );
 } );
 
-$( '.disabled' )
-    .click( () => false );
+$( 'main' )
+    .on( 'click hover mouseover focus', '.disabled', function( e ) {
+        e.stopPropagation();
+        e.preventDefault();
+        return false;
+    } );
 
 $( '#hideImages' )
     .change( () => {
-        $( '#fiximages' )
+        $( '#fixImages' )
             .parent()
-            .attr( 'class', $( this )
-                .is( ':checked' ) ? '' : 'disabled' );
+            .attr( 'class', $( '#hideImages' )
+                .is( ':checked' ) ? 'ok' : 'disabled' );
+    } );
+
+$( '#showNotifications' )
+    .change( function() {
+        if( $( this ).is( ':checked' ) )
+            $( '#notifications' ).slideDown( 200 );
+        else
+            $( '#notifications' ).slideUp( 200 );
     } );
 
 $( '#queue' )
