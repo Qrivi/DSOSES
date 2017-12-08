@@ -23,6 +23,7 @@ body {
 }
 
 fieldset {
+    position: relative;
     border: none;
     outline: none;
     margin: 0;
@@ -56,7 +57,7 @@ label>span {
     padding-top: 4px;
 }
 
-input[type=checkbox], input[type=radio] {
+#notifications, #collapsibleTables_val, #moreColumns_val, input[type=checkbox], input[type=radio] {
     display: none;
 }
 
@@ -78,6 +79,19 @@ input[type=number]::-webkit-inner-spin-button {
 
 input[type=number]:focus::-webkit-inner-spin-button {
     -webkit-appearance: inner-spin-button;
+}
+
+select {
+    position: absolute;
+    top: 22px;
+    right: 40px;
+    border: none;
+    outline: none;
+    background: none !important;
+    text-align: center;
+    width: 100px;
+    zoom: .9;
+    cursor: pointer;
 }
 
 footer {

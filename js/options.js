@@ -1,4 +1,5 @@
 let config;
+let loaded;
 
 chrome.storage.sync.get( 'sosconfig', ( obj ) => {
     config = obj.sosconfig;
@@ -8,14 +9,14 @@ chrome.storage.sync.get( 'sosconfig', ( obj ) => {
         .trigger( 'change' );
 
     $( '#showAllNotifications' )
-        .prop( 'checked', config.showNotifications )
+        .prop( 'checked', config.showAllNotifications )
         .trigger( 'change' );
 
     $( '#showQueueNotifications' )
-        .prop( 'checked', !config.showNotifications )
+        .prop( 'checked', !config.showAllNotifications )
         .trigger( 'change' );
 
-    $( '#queue' )
+    $( '#showQueueNotifications_val' )
         .val( config.showQueueNotifications );
 
     $( '#autoRefresh' )
@@ -38,7 +39,11 @@ chrome.storage.sync.get( 'sosconfig', ( obj ) => {
         .prop( 'checked', config.moreColumns )
         .trigger( 'change' );
 
+    $( '#collapsibleTables' )
+        .prop( 'checked', config.collapsibleTables )
+        .trigger( 'change' );
 
+    loaded = true;
     $( '.loading' )
         .delay( 500 )
         .fadeOut( 500 );
@@ -55,8 +60,7 @@ $( '#hideImages' )
     .change( () => {
         $( '#fixImages' )
             .parent()
-            .attr( 'class', $( '#hideImages' )
-                .is( ':checked' ) ? 'ok' : 'disabled' );
+            .attr( 'class', $( '#hideImages' ).is( ':checked' ) ? 'ok' : 'disabled' );
     } );
 
 $( '#showNotifications' )
@@ -67,17 +71,19 @@ $( '#showNotifications' )
             $( '#notifications' ).slideUp( 200 );
     } );
 
-$( '#queue' )
+$( '#showQueueNotifications_val' )
     .focus( () => {
         $( '#showQueueNotifications' )
             .prop( 'checked', true )
             .trigger( 'change' );
     } )
     .on( 'input', () => {
-        let val = parseInt( $( '#queue' ).val() );
+        let val = parseInt( $( '#showQueueNotifications_val' ).val() );
         if( isNaN( val ) || val < 0 || val > 25 )
             val = 3;
-        $( '#queue' ).val( val );
+        $( '#showQueueNotifications_val' ).val( val );
+        config.showQueueNotifications = val;
+        save();
     } );
 
 $( 'input[type=checkbox], input[type=radio]' )
@@ -95,10 +101,35 @@ const toggle = ( button ) => {
     $( button )
         .next( 'label' )
         .removeClass( 'on off' )
-        .addClass( $( button )
-            .is( ':checked' ) ? 'on' : 'off' );
+        .addClass( $( button ).is( ':checked' ) ? 'on' : 'off' );
+
+    let id = $( button ).attr( 'id' );
+
+    if( id === 'showQueueNotifications' )
+        config.showQueueNotifications = $( '#showQueueNotifications_val' ).val();
+    else if( id === 'moreColumns' || id === 'collapsibleTables' )
+        toggleDropdown( id, $( button ).is( ':checked' ) );
+    else
+        config[ id ] = $( button ).is( ':checked' );
+
+    if( loaded ) {
+        //console.log( id, $( button ).is( ':checked' ) );
+        save();
+    }
 }
 
-const checkAndSync = () => {
-    console.log( 'syncing' )
+const toggleDropdown = ( id, checked ) => {
+    if( checked ) {
+        $( '#' + id + '_val' ).fadeIn();
+        config[ id ] = $( '#' + id + '_val' ).val();
+    } else {
+        $( '#' + id + '_val' ).fadeOut();
+        config[ id ] = false;
+    }
+}
+
+const save = () => {
+    chrome.storage.sync.set( {
+        'sosconfig': config
+    } );
 }

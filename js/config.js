@@ -7,8 +7,8 @@ let config = {
     hideImages: false,
     fixImages: true,
     enableMasonry: true,
-    moreColumns: 'disabled', //disabled, always, smart
-    collapsibleTables: 'disabled', //disabled, default, compact
+    moreColumns: false, //false, always, smart
+    collapsibleTables: false, //false, default, compact
 };
 
 const saveConfig = () => {

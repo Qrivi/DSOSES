@@ -22,7 +22,7 @@
             Meldingen voor wachtrijupdates
         </label>
 
-        <div id="notifications" style="display:none">
+        <div id="notifications">
             <input id="showAllNotifications" name="notifications" type="radio">
             <label for="showAllNotifications" class="bullet off">
                 Toon alle meldingen
@@ -30,7 +30,7 @@
 
             <input id="showQueueNotifications" name="notifications" type="radio">
             <label class="bullet off">
-                Vanaf <input id="queue" type="number" min="0" max="25" step="1" val="3"> medestudenten voor me
+                Vanaf <input id="showQueueNotifications_val" type="number" min="0" max="25" step="1" val="3"> medestudenten voor me
             </label>
         </div>
     </fieldset>
@@ -52,14 +52,6 @@
     </fieldset>
 
     <fieldset>
-        <input id="collapsibleTables" type="checkbox">
-        <label for="collapsibleTables" class="switch off">
-            Opvouwbare tafels
-            <span>Toon of verberg wachtrijen door op de hoofding te klikken</span>
-        </label>
-    </fieldset>
-
-    <fieldset>
         <input id="autoRefresh" type="checkbox">
         <label for="autoRefresh" class="switch off">
             Automatisch bijwerken van wachtrijen
@@ -68,11 +60,27 @@
     </fieldset>
 
     <fieldset>
+        <input id="collapsibleTables" type="checkbox">
+        <label for="collapsibleTables" class="switch off">
+            Opvouwbare tafels
+            <span>Toon of verberg wachtrijen door op de hoofding te klikken</span>
+        </label>
+        <select id="collapsibleTables_val">
+          <option value="default">standaard</option>
+          <option value="compact">compact</option>
+        </select>
+    </fieldset>
+
+    <fieldset>
         <input id="moreColumns" type="checkbox">
         <label for=moreColumns class="switch off">
             Meer kolommen voor tafels
             <span>Gebruik tot vijf kolommen, afhankelijk van de vensterbreedte</span>
         </label>
+        <select id="moreColumns_val">
+          <option value="always">altijd</option>
+          <option value="smart">slim</option>
+        </select>
     </fieldset>
 
     <fieldset>
