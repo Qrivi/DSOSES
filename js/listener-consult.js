@@ -42,7 +42,37 @@ $( '.sa-confirm-button-container button.confirm' )
     } );
 
 const collapsibleTables = () => {
-    console.log( 'collapsibleTables ar coming' );
+    $( 'head' ).append(
+        '<style>article.table{overflow: hidden} .table-name{cursor: n-resize}' +
+        '.table .lecturers-container img{height: 128px} .table > *{flex-shrink: 0}</style>' +
+        '<style id="collapsed"></style>'
+    );
+
+    let size = 55; //compact
+    if( config.collapsibleTables === 'default' ) {
+        size += 40;
+        if( !config.hideImages )
+            size += 160;
+    }
+
+    $( '.consult-tables-container' ).on( 'click', '.table-name', function() {
+        let table = 'article.table[data-consult-table-id="' + $( this ).parent().attr( 'data-consult-table-id' ) + '"]';
+
+        if( collapsed.includes( table ) )
+            collapsed = collapsed.filter( t => t !== table );
+        else
+            collapsed.push( table );
+
+        let output = '';
+        if( collapsed.length )
+            output = collapsed.join() + '{max-height: ' + size + 'px !important}' +
+            collapsed.map( t => t += ' .table-name' ).join() + '{cursor: s-resize !important}'
+
+        $( '#collapsed' ).text( output );
+
+        if( config.enableMasonry )
+            enableMasonry();
+    } );
 }
 
 const addColumns = () => {
@@ -84,8 +114,11 @@ const fixImages = ( source ) => {
 }
 
 const enableMasonry = () => {
-    $( '.consult-tables-container' )
+    if( !$( '.masonry-gutter' ).length )
+        $( '.consult-tables-container' )
         .append( '<div class="masonry-gutter" style="width:10%"></div>' )
+
+    $( '.consult-tables-container' )
         .masonry( {
             gutter: '.masonry-gutter',
             percentPosition: true
@@ -130,9 +163,10 @@ const posToTitle = ( source ) => {
 
     if( row ) {
         let position = parseInt( row.substr( 0, row.indexOf( '.' ) ) ) - 1;
-        if( !position )
-            position = 'GO!';
-        $( document ).attr( 'title', '(' + position + ') Devine SOS tool' );
+        if( position )
+            $( document ).attr( 'title', '(' + position + ') Devine SOS tool' );
+        else
+            $( document ).attr( 'title', 'Jouw beurt!' );
     } else {
         $( document ).attr( 'title', 'Devine SOS tool - registreer' );
     }
