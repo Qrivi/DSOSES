@@ -17,7 +17,7 @@ chrome.storage.sync.get( 'sosconfig', ( obj ) => {
         setNewTime();
         setInterval( refreshData, config.refreshRate );
         $( '.inline-header h1' )
-            .text( 'OVERZICHT TAFELS' );
+            .text( $( '.inline-header h2' ).text() );
         $( '.inline-header' )
             .css( 'position', 'relative' )
             .append( '<img style="position:absolute;top:0;right:0;width:50px" src="https://i.imgur.com/rBWlNPX.gif" title="Wachtrijen worden live bijgewerkt">' )

@@ -1,10 +1,11 @@
 var dataset;
 let user;
-let enabled;
+let run;
 
 const checkAuth = () => {
     $.get( 'https://sos.devine-tools.be/student/consulten', ( data ) => {
             console.log( 'Updating' );
+            chrome.browserAction.setBadgeText( { text: '' } );
             let title = $( data ).filter( 'title' ).text();
 
             if( title === 'Devine SOS tool - login' )
@@ -20,7 +21,7 @@ const checkAuth = () => {
                     console.log( 'Fetched user: ', user );
                 } );
 
-            enabled = true;
+            run = 0;
             dataset = { empty: true };
 
             let links = $( data )
@@ -29,31 +30,17 @@ const checkAuth = () => {
                 links.each( function() {
                     fetchConsultation( this.href );
                 } );
-            else
-                enabled = false;
         } )
         .fail( makeError );
-
-    setTimeout( () => {
-        if( enabled )
-            checkAuth();
-    }, config.refreshRate );
 }
 
 const fetchConsultation = ( href ) => {
     console.log( 'Consultations found' );
     $.get( href, ( data ) => {
-        $( data )
-            .find( '.registrations-container .registration > span' )
+        $( data ).find( '.registrations-container .registration > span' )
             .each( function() {
-                let row = $( this ).text();
-
-                if( row.includes( user ) ) {
-                    enabled = true;
+                if( $( this ).text().includes( user ) )
                     parseConsultation( this.closest( 'article.table' ), row );
-                } else {
-                    enabled = false;
-                }
             } );
     } );
 }
@@ -70,7 +57,17 @@ const parseConsultation = ( consultation, row ) => {
 
     console.log( 'Subscribed to: ' + lecturer );
     checkNotificationSettings( lecturer, position );
+
+    run++;
     dataset = { id: id, lecturer: lecturer, position: position, html: consultation };
+
+    if( position )
+        chrome.browserAction.setBadgeText( { text: position } );
+    else
+        chrome.browserAction.setBadgeText( { text: 'GO!' } );
+
+    if( run === 1 )
+        setTimeout( checkAuth, config.refreshRate );
 }
 
 const makeError = ( message ) => {
@@ -78,6 +75,8 @@ const makeError = ( message ) => {
         message = 'Could not connect';
     dataset = { error: message };
     console.log( 'Error: ' + message );
+    chrome.browserAction.setBadgeText( { text: 'error' } );
+    chrome.browserAction.setBadgeBackgroundColor( { color: '#F00' } );
 }
 
 const checkNotificationSettings = ( lecturer, position ) => {
