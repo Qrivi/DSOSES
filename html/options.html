@@ -6,104 +6,103 @@
     <meta name="description" content="Pop-up page">
     <meta name="author" content="Kristof Dewilde">
 
-    <title>SOS</title>
+    <title>Devine SOS Enhancement Suite - options</title>
 
     <link rel="stylesheet" href="../css/options.css">
 </head>
 
 <body>
+    <main>
+        <div class="loading">&nbsp;</div>
+
+        <fieldset>
+            <input id="showNotifications" type="checkbox">
+            <label for="showNotifications" class="switch off">
+                Meldingen voor wachtrijupdates
+            </label>
+
+            <div id="notifications">
+                <input id="showAllNotifications" name="notifications" type="radio">
+                <label for="showAllNotifications" class="bullet off">
+                    Toon alle meldingen
+                </label>
+
+                <input id="showQueueNotifications" name="notifications" type="radio">
+                <label class="bullet off">
+                    Vanaf <input id="showQueueNotifications_val" type="number" min="0" max="25" step="1" val="3"> medestudenten voor me
+                </label>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <input id="hideImages" type="checkbox">
+            <label for="hideImages" class="switch off">
+                Profielfoto's verbergen
+                <span>Toon geen profielfoto's voor lectoren, enkel de wachtrij</span>
+            </label>
+        </fieldset>
+
+        <fieldset>
+            <input id="fixImages" type="checkbox">
+            <label for="fixImages" class="switch off">
+                Placeholders voor ontbrekende profielfoto's
+                <span>Gebruik de ingebouwde placeholders als voor lectoren zonder profielfoto</span>
+            </label>
+        </fieldset>
+
+        <fieldset>
+            <input id="autoRefresh" type="checkbox">
+            <label for="autoRefresh" class="switch off">
+                Automatisch bijwerken van wachtrijen
+                <span>Update de wachtrijen live zonder de pagina te moeten vernieuwen</span>
+            </label>
+        </fieldset>
+
+        <fieldset>
+            <input id="collapsibleTables" type="checkbox">
+            <label for="collapsibleTables" class="switch off">
+                Opvouwbare tafels
+                <span>Toon of verberg wachtrijen door op de hoofding te klikken</span>
+            </label>
+            <select id="collapsibleTables_val" title='"Standaard" verbergt enkel de wachtijen per tafel, terwijl "compact" alles behalve de naam van de lectore(n) verbergt.'>
+                <option value="default">standaard</option>
+                <option value="compact">compact</option>
+            </select>
+        </fieldset>
+
+        <fieldset>
+            <input id="moreColumns" type="checkbox">
+            <label for=moreColumns class="switch off">
+                Meer kolommen voor tafels
+                <span>Gebruik tot vijf kolommen, afhankelijk van de vensterbreedte</span>
+            </label>
+            <select id="moreColumns_val" title='"Altijd" maakt extra kolommen aan als je schermbreedte dit toelaat. "Slim" doet hetzelfde, maar alleen als er meer tafels dan kolommen zijn.'>
+                <option value="smart">slim</option>
+                <option value="always">altijd</option>
+            </select>
+        </fieldset>
+
+        <fieldset>
+            <input id="enableMasonry" type="checkbox">
+            <label for="enableMasonry" class="switch off">
+                Puzzellay-out voor tafels
+                <span>Schik alle tafels volgens een cascading grid</span>
+            </label>
+        </fieldset>
+    </main>
+
+    <footer>
+        <a href="https://twitter.com/Qrivi">
+            <svg viewBox="0 0 250 203.1">
+                <path d="M78.6,203.1c94.3,0,145.9-78.2,145.9-145.9c0-2.2,0-4.4-0.1-6.6c10-7.3,18.7-16.3,25.6-26.5c-9.4,4.1-19.3,6.9-29.5,8.1 c10.7-6.4,18.7-16.5,22.5-28.4c-10.1,6-21.1,10.2-32.6,12.4c-19.4-20.7-51.9-21.7-72.6-2.2c-13.3,12.5-19,31.2-14.8,49 C81.9,60.9,43.4,41.4,17.4,9.4C3.8,32.8,10.7,62.8,33.3,77.8c-8.2-0.2-16.1-2.4-23.3-6.4c0,0.2,0,0.4,0,0.6	c0,24.4,17.2,45.4,41.2,50.3c-7.6,2.1-15.5,2.4-23.2,0.9c6.7,20.9,26,35.2,47.9,35.6c-18.2,14.3-40.6,22-63.7,22
+                c-4.1,0-8.2-0.3-12.2-0.7C23.5,195.2,50.7,203.1,78.6,203.1"/>
+            </svg>
+        </a>
+    </footer>
+
+    <script src="../js/lib/jquery-3.2.1.min.js"></script>
+    <script src="../js/config.js"></script>
+    <script src="../js/options.js"></script>
 </body>
-<main>
-    <div class="loading">&nbsp;</div>
-
-    <fieldset>
-        <input id="showNotifications" type="checkbox">
-        <label for="showNotifications" class="switch off">
-            Meldingen voor wachtrijupdates
-        </label>
-
-        <div id="notifications">
-            <input id="showAllNotifications" name="notifications" type="radio">
-            <label for="showAllNotifications" class="bullet off">
-                Toon alle meldingen
-            </label>
-
-            <input id="showQueueNotifications" name="notifications" type="radio">
-            <label class="bullet off">
-                Vanaf <input id="showQueueNotifications_val" type="number" min="0" max="25" step="1" val="3"> medestudenten voor me
-            </label>
-        </div>
-    </fieldset>
-
-    <fieldset>
-        <input id="hideImages" type="checkbox">
-        <label for="hideImages" class="switch off">
-            Profielfoto's verbergen
-            <span>Toon geen profielfoto's voor lectoren, enkel de wachtrij</span>
-        </label>
-    </fieldset>
-
-    <fieldset>
-        <input id="fixImages" type="checkbox">
-        <label for="fixImages" class="switch off">
-            Placeholders voor ontbrekende profielfoto's
-            <span>Gebruik de ingebouwde placeholders als voor lectoren zonder profielfoto</span>
-        </label>
-    </fieldset>
-
-    <fieldset>
-        <input id="autoRefresh" type="checkbox">
-        <label for="autoRefresh" class="switch off">
-            Automatisch bijwerken van wachtrijen
-            <span>Update de wachtrijen live zonder de pagina te moeten vernieuwen</span>
-        </label>
-    </fieldset>
-
-    <fieldset>
-        <input id="collapsibleTables" type="checkbox">
-        <label for="collapsibleTables" class="switch off">
-            Opvouwbare tafels
-            <span>Toon of verberg wachtrijen door op de hoofding te klikken</span>
-        </label>
-        <select id="collapsibleTables_val" title='"Standaard" verbergt enkel de wachtijen per tafel, terwijl "compact" alles behalve de naam van de lectore(n) verbergt.'>
-            <option value="default">standaard</option>
-            <option value="compact">compact</option>
-        </select>
-    </fieldset>
-
-    <fieldset>
-        <input id="moreColumns" type="checkbox">
-        <label for=moreColumns class="switch off">
-            Meer kolommen voor tafels
-            <span>Gebruik tot vijf kolommen, afhankelijk van de vensterbreedte</span>
-        </label>
-        <select id="moreColumns_val" title='"Altijd" maakt extra kolommen aan als je schermbreedte dit toelaat. "Slim" doet hetzelfde, maar alleen als er meer tafels dan kolommen zijn.'>
-            <option value="smart">slim</option>
-            <option value="always">altijd</option>
-        </select>
-    </fieldset>
-
-    <fieldset>
-        <input id="enableMasonry" type="checkbox">
-        <label for="enableMasonry" class="switch off">
-            Puzzellay-out voor tafels
-            <span>Schik alle tafels volgens een cascading grid</span>
-        </label>
-    </fieldset>
-
-</main>
-
-<footer>
-    <a href="https://twitter.com/Qrivi">
-    <svg viewBox="0 0 250 203.1">
-        <path d="M78.6,203.1c94.3,0,145.9-78.2,145.9-145.9c0-2.2,0-4.4-0.1-6.6c10-7.3,18.7-16.3,25.6-26.5c-9.4,4.1-19.3,6.9-29.5,8.1 c10.7-6.4,18.7-16.5,22.5-28.4c-10.1,6-21.1,10.2-32.6,12.4c-19.4-20.7-51.9-21.7-72.6-2.2c-13.3,12.5-19,31.2-14.8,49 C81.9,60.9,43.4,41.4,17.4,9.4C3.8,32.8,10.7,62.8,33.3,77.8c-8.2-0.2-16.1-2.4-23.3-6.4c0,0.2,0,0.4,0,0.6	c0,24.4,17.2,45.4,41.2,50.3c-7.6,2.1-15.5,2.4-23.2,0.9c6.7,20.9,26,35.2,47.9,35.6c-18.2,14.3-40.6,22-63.7,22
-        c-4.1,0-8.2-0.3-12.2-0.7C23.5,195.2,50.7,203.1,78.6,203.1"/>
-    </svg>
-</a>
-</footer>
-
-<script src="../js/lib/jquery-3.2.1.min.js"></script>
-<script src="../js/config.js"></script>
-<script src="../js/options.js"></script>
 
 </html>
