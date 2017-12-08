@@ -16,7 +16,7 @@
         "matches": ["*://sos.devine-tools.be/student"],
         "js": ["js/listener-login.js"]
     }, {
-        "matches": ["*://sos.devine-tools.be/student/registreer/consult/*"],
+        "matches": ["*://sos.devine-tools.be/student/registreer/consult/*", "http://sandbox.krivi.be/sos/tafels.html"],
         "js": ["js/lib/jquery-3.2.1.min.js", "js/lib/masonry.pkgd.min.js", "js/listener-consult.js"]
     }],
 

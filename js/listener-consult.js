@@ -7,17 +7,19 @@ chrome.storage.sync.get( 'sosconfig', ( obj ) => {
     console.log( 'Loaded configuration' );
     console.log( config );
 
-    if( config.collapsibleTables )
-        collapsibleTables();
     if( config.hideImages )
         hideImages();
     if( !config.hideImages && config.fixImages )
         fixImages();
     if( config.moreColumns )
         addColumns();
+    if( config.collapsibleTables )
+        collapsibleTables();
     if( config.enableMasonry )
         setTimeout( enableMasonry, 500 ); // better: wait till images/fixImages() are loaded/ready
     if( config.autoRefresh ) {
+        if( config.positionInTab )
+            posToTitle();
         setNewTime();
         setInterval( refreshData, config.refreshRate );
         $( '.inline-header h1' )
@@ -40,7 +42,7 @@ $( '.sa-confirm-button-container button.confirm' )
     } );
 
 const collapsibleTables = () => {
-    console.log( 'coming' );
+    console.log( 'collapsibleTables ar coming' );
 }
 
 const addColumns = () => {
@@ -62,7 +64,6 @@ const addColumns = () => {
 }
 
 const hideImages = () => {
-    console.log( 'hiding images' );
     $( 'head' ).append( '<style>article.table .lecturers-container{display:none !important}</style>' );
 }
 
@@ -101,7 +102,7 @@ const refreshData = () => {
             newTables = fixImages( newTables );
 
         if( config.positionInTab )
-            setDocumentTitle( newTables );
+            posToTitle( newTables );
 
         $( '.consult-tables-container' )
             .empty()
@@ -117,8 +118,11 @@ const refreshData = () => {
     } );
 }
 
-const setDocumentTitle = ( data ) => {
-    let row = $( data )
+const posToTitle = ( source ) => {
+    if( !source )
+        source = $( '.consult-tables-container' );
+
+    let row = $( source )
         .find( 'button.icon.trash' )
         .siblings( 'span' )
         .first()
@@ -126,8 +130,11 @@ const setDocumentTitle = ( data ) => {
 
     if( row ) {
         let position = parseInt( row.substr( 0, row.indexOf( '.' ) ) ) - 1;
+        if( !position )
+            position = 'GO!';
+        $( document ).attr( 'title', '(' + position + ') Devine SOS tool' );
     } else {
-        $( document ).attr( 'title', 'Niet ingeschreven' );
+        $( document ).attr( 'title', 'Devine SOS tool - registreer' );
     }
 }
 
