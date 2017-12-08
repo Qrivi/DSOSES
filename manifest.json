@@ -30,6 +30,10 @@
         "chrome_style": true
     },
 
+    "web_accessible_resources": [
+        "img/pulse.gif"
+    ],
+
     "permissions": [
         "storage",
         "cookies",

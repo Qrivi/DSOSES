@@ -2,7 +2,7 @@ var dataset;
 let user;
 let run;
 
-const checkAuth = () => {
+var checkAuth = ( callback, forceStop ) => {
     $.get( 'https://sos.devine-tools.be/student/consulten', ( data ) => {
             console.log( 'Updating' );
             chrome.browserAction.setBadgeText( { text: '' } );
@@ -24,29 +24,42 @@ const checkAuth = () => {
             run = 0;
             dataset = { empty: true };
 
+            if( forceStop ) {
+                callback();
+                return;
+            }
+
             let links = $( data )
                 .find( '.overview-table-container a' );
             if( links.length )
                 links.each( function() {
-                    fetchConsultation( this.href );
+                    fetchConsultation( this.href, callback );
                 } );
+            else if( callback )
+                callback();
         } )
         .fail( makeError );
 }
 
-const fetchConsultation = ( href ) => {
+const fetchConsultation = ( href, callback ) => {
     console.log( 'Consultations found' );
     $.get( href, ( data ) => {
+        let table, row;
         $( data ).find( '.registrations-container .registration > span' )
             .each( function() {
-                if( $( this ).text().includes( user ) )
-                    parseConsultation( this.closest( 'article.table' ), row );
+                row = $( this ).text();
+                if( row.includes( user ) )
+                    table = this.closest( 'article.table' );
             } );
+        if( table )
+            parseConsultation( table, row, callback );
+        else
+            callback();
     } );
 }
 
-const parseConsultation = ( consultation, row ) => {
-    let lecturer = $( consultation )
+const parseConsultation = ( table, row, callback ) => {
+    let lecturer = $( table )
         .find( '.table-name span' )
         .first()
         .text();
@@ -55,11 +68,12 @@ const parseConsultation = ( consultation, row ) => {
         .toLowerCase();
     let position = parseInt( row.substr( 0, row.indexOf( '.' ) ) ) - 1;
 
+    run++;
+    dataset = { id: id, lecturer: lecturer, position: position, html: table };
+
     console.log( 'Subscribed to: ' + lecturer );
     checkNotificationSettings( lecturer, position );
-
-    run++;
-    dataset = { id: id, lecturer: lecturer, position: position, html: consultation };
+    callback();
 
     if( position )
         chrome.browserAction.setBadgeText( { text: position } );

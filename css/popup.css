@@ -17,8 +17,10 @@ body {
 }
 
 .top-bar {
+    position: relative;
+    z-index: 10;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     width: 100%;
     height: 61px;
@@ -28,46 +30,34 @@ body {
 .top-bar svg {
     cursor: pointer;
     fill: #FFF;
-}
-
-.top-bar div {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: 100%;
-    width: 70px;
-    margin-right: 7px;
-}
-
-.top-bar svg.logo {
-    width: 44px;
-    height: 44px;
-}
-
-.top-bar svg.options {
     width: 20px;
     height: 20px;
+    margin-right: 20px;
 }
 
-.top-bar svg.power {
-    width: 23px;
-    height: 23px;
+.top-bar svg#logo {
+    width: 44px;
+    height: 44px;
+    position: absolute;
+    top: 8px;
+    left: 8px;
 }
 
-.top-bar svg.power.off, .top-bar svg.power.on:hover {
+.top-bar svg#pause, .top-bar svg#play:hover, .top-bar svg#play.busy {
     fill: #EA5888;
 }
 
-.top-bar svg:hover, .top-bar svg.power.off:hover, .top-bar svg.power.on {
+.top-bar svg#play, .top-bar svg#pause:hover, .top-bar svg#pause.busy, .top-bar svg:hover {
     fill: #74FBFD;
 }
 
-.topbar #options {
-    padding: 50px 20px;
-    min-width: 900px;
+#play, #pause {
+    display: none;
 }
 
 main>article:not(.table) {
+    position: relative;
+    z-index: 1;
     display: none;
     padding: 20px;
 }
@@ -128,6 +118,27 @@ span.info {
 p.info {
     display: none;
     color: #AAA;
+}
+
+.loading {
+    padding: 0;
+}
+
+.loading h1 {
+    display: none;
+}
+
+.loading img {
+    width: 100%;
+    margin-top: -55px;
+}
+
+.loading p {
+    position: absolute;
+    top: 150px;
+    left: 0;
+    right: 0;
+    text-align: center;
 }
 
 #contact {
