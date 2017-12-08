@@ -95,7 +95,7 @@ select {
     text-align: center;
     width: 100px;
     zoom: .9;
-    cursor: pointer;
+    cursor: help;
 }
 
 footer {
