@@ -40,11 +40,21 @@ const collapsibleTables = () => {
 }
 
 const addColumns = () => {
+    let columns = 5;
+    if( config.moreColumns === 'smart' )
+        columns = $( 'article.table' ).length;
+
+    let css = '<style>@media (min-width: 1550px) and (max-width: 5555px){.masonry-gutter{width:5% !important}}';
+    if( columns > 4 )
+        css += '@media (min-width: 3000px) and (max-width: 5555px){.consult-tables-container .table{width:16%}}';
+    if( columns > 3 )
+        css += '@media (min-width: 1900px) and (max-width: 2999px){.consult-tables-container .table{width:calc(85% / 4)}}';
+    if( columns > 2 )
+        css += '@media (min-width: 1550px) and (max-width: 1899px){.consult-tables-container .table{width:30%}}';
+
+    css += '</style>';
     $( 'head' )
-        .append( '<style>@media (min-width: 1550px) and (max-width: 5555px){.masonry-gutter{width:5% !important}}' +
-            '@media (min-width: 1550px) and (max-width: 1899px){.consult-tables-container .table{width:30%}}' +
-            '@media (min-width: 1900px) and (max-width: 2999px){.consult-tables-container .table{width:calc(85% / 4)}}' +
-            '@media (min-width: 3000px) and (max-width: 5555px){.consult-tables-container .table{width:16%}}</style>' );
+        .append( css );
 }
 
 const fixImages = ( source ) => {
