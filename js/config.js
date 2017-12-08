@@ -4,6 +4,7 @@ var config = {
     showAllNotifications: false,
     showQueueNotifications: 3,
     autoRefresh: true,
+    positionInTab: false,
     hideImages: false,
     fixImages: true,
     enableMasonry: true,

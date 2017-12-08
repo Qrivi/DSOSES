@@ -91,6 +91,9 @@ const refreshData = () => {
         if( config.fixImages )
             newTables = fixImages( newTables );
 
+        if( config.positionInTab )
+            setDocumentTitle( newTables );
+
         $( '.consult-tables-container' )
             .empty()
             .append( newTables.children() );
@@ -103,6 +106,20 @@ const refreshData = () => {
         $( window ).scrollTop( position );
         setNewTime();
     } );
+}
+
+const setDocumentTitle = ( data ) => {
+    let row = $( data )
+        .find( 'button.icon.trash' )
+        .siblings( 'span' )
+        .first()
+        .text();
+
+    if( row ) {
+        let position = parseInt( row.substr( 0, row.indexOf( '.' ) ) ) - 1;
+    } else {
+        $( document ).attr( 'title', 'Niet ingeschreven' );
+    }
 }
 
 const setNewTime = () => {
