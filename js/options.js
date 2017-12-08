@@ -24,6 +24,10 @@ const init = () => {
         .prop( 'checked', config.autoRefresh )
         .trigger( 'change' );
 
+    $( '#positionInTab' )
+        .prop( 'checked', config.positionInTab )
+        .trigger( 'change' );
+
     $( '#hideImages' )
         .prop( 'checked', config.hideImages )
         .trigger( 'change' );
@@ -60,6 +64,11 @@ $( 'main' )
         $( '#fixImages' )
             .parent()
             .attr( 'class', $( this ).is( ':checked' ) ? 'disabled' : '' );
+    } )
+    .on( 'change', '#autoRefresh', function() {
+        $( '#positionInTab' )
+            .parent()
+            .attr( 'class', $( this ).is( ':checked' ) ? '' : 'disabled' );
     } )
     .on( 'change', '#showNotifications', function() {
         if( $( this ).is( ':checked' ) )
