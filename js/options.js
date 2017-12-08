@@ -59,7 +59,7 @@ $( 'main' )
     .on( 'change', '#hideImages', function() {
         $( '#fixImages' )
             .parent()
-            .attr( 'class', $( this ).is( ':checked' ) ? '' : 'disabled' );
+            .attr( 'class', $( this ).is( ':checked' ) ? 'disabled' : '' );
     } )
     .on( 'change', '#showNotifications', function() {
         if( $( this ).is( ':checked' ) )

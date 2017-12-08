@@ -4,10 +4,14 @@ let collapsed = [];
 
 chrome.storage.sync.get( 'sosconfig', ( obj ) => {
     config = obj.sosconfig;
+    console.log( 'Loaded configuration' );
+    console.log( config );
 
     if( config.collapsibleTables )
         collapsibleTables();
-    if( config.fixImages )
+    if( config.hideImages )
+        hideImages();
+    if( !config.hideImages && config.fixImages )
         fixImages();
     if( config.moreColumns )
         addColumns();
@@ -57,6 +61,11 @@ const addColumns = () => {
         .append( css );
 }
 
+const hideImages = () => {
+    console.log( 'hiding images' );
+    $( 'head' ).append( '<style>article.table .lecturers-container{display:none !important}</style>' );
+}
+
 const fixImages = ( source ) => {
     if( !source )
         source = $( '.consult-tables-container' );
@@ -88,7 +97,7 @@ const refreshData = () => {
     $.get( window.location.href, ( data ) => {
         let newTables = $( data ).find( '.consult-tables-container' );
 
-        if( config.fixImages )
+        if( !config.hideImages && config.fixImages )
             newTables = fixImages( newTables );
 
         if( config.positionInTab )
