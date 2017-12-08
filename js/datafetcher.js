@@ -81,7 +81,7 @@ const makeError = ( message ) => {
 }
 
 const checkNotificationSettings = ( lecturer, position ) => {
-    loadConfig( () = {
+    loadConfig( () => {
         if( config.showNotifications && dataset.position && dataset.position !== position ) {
             if( config.showAllNotifications )
                 showNotification( lecturer, position );

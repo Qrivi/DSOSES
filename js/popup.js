@@ -16,6 +16,11 @@ const init = () => {
     bg = chrome.extension.getBackgroundPage();
 
     $( 'article.table' ).remove();
+    if( !bg || !bg.dataset ) {
+        $( 'article.error' ).show();
+        return;
+    }
+
     if( bg.dataset.error && bg.dataset.error === "Not logged in" )
         $( 'article.login' ).show();
     else if( bg.dataset.empty )
