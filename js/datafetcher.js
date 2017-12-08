@@ -75,8 +75,7 @@ const makeError = ( message ) => {
         message = 'Could not connect';
     dataset = { error: message };
     console.log( 'Error: ' + message );
-    chrome.browserAction.setBadgeText( { text: 'error' } );
-    chrome.browserAction.setBadgeBackgroundColor( { color: '#F00' } );
+    chrome.browserAction.setBadgeText( { text: '!' } );
 }
 
 const checkNotificationSettings = ( lecturer, position ) => {

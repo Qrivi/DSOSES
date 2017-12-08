@@ -1,4 +1,0 @@
-- dichtklapbare tafels
-- hideImages
-- "smart" moreColumns: alleen als er meer dan 2 tafels zijn
-- descriptieve tekst on select/option hover?

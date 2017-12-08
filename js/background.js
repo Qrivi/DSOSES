@@ -4,16 +4,14 @@ chrome.runtime.onMessage.addListener(
 
         if( request.message === "check_auth" )
             checkAuth();
-        else if( request.message === "perform_action" )
-            switch( request.action ) {
-                case 'inschrijven':
-                    config.enabled = true;
-                    saveConfig();
-                    checkAuth();
-                case 'uitschrijven':
-                    dataset = {};
-                    break;
-            }
+        // else if( request.message === "perform_action" )
+        //     switch( request.action ) {
+        //         case 'inschrijven':
+        //             checkAuth();
+        //         case 'uitschrijven':
+        //             dataset = {};
+        //             break;
+        //     }
     }
 );
 

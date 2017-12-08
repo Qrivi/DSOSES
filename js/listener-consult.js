@@ -30,15 +30,16 @@ chrome.storage.sync.get( 'sosconfig', ( obj ) => {
     }
 } );
 
-$( '.registration button.trash' )
-    .on( 'click', () => { action = 'uitschrijven' } );
-
-$( '.details button.subscribe' )
-    .on( 'click', () => { action = 'inschrijven' } );
+// $( '.registration button.trash' )
+//     .on( 'click', () => { action = 'uitschrijven' } );
+//
+// $( '.details button.subscribe' )
+//     .on( 'click', () => { action = 'inschrijven' } );
 
 $( '.sa-confirm-button-container button.confirm' )
     .on( 'click', () => {
-        chrome.runtime.sendMessage( { "message": "perform_action", "action": action } );
+        //chrome.runtime.sendMessage( { "message": "perform_action", "action": action } );
+        chrome.runtime.sendMessage( { "message": "check_auth" } );
     } );
 
 const collapsibleTables = () => {

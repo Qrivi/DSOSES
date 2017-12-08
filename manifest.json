@@ -13,7 +13,7 @@
     },
 
     "content_scripts": [{
-        "matches": ["*://sos.devine-tools.be/student"],
+        "matches": ["*://sos.devine-tools.be/student", "*://sos.devine-tools.be/login"],
         "js": ["js/listener-login.js"]
     }, {
         "matches": ["*://sos.devine-tools.be/student/registreer/consult/*", "http://sandbox.krivi.be/sos/tafels.html"],
