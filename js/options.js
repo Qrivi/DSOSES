@@ -3,6 +3,10 @@ let loaded;
 const init = () => {
     $( '#showQueueNotifications_val' )
         .val( config.showQueueNotifications );
+    if( config.moreColumns )
+        $( '#moreColumns_val' ).val( config.moreColumns );
+    if( config.collapsibleTables )
+        $( '#collapsibleTables_val' ).val( config.collapsibleTables );
 
     $( '#showNotifications' )
         .prop( 'checked', config.showNotifications )
@@ -44,7 +48,6 @@ const init = () => {
     $( '.loading' )
         .delay( 500 )
         .fadeOut( 500 );
-
 };
 
 $( 'main' )
@@ -70,14 +73,12 @@ $( 'main' )
             .trigger( 'change' );
     } )
     .on( 'input', '#showQueueNotifications_val', function() {
-        if( loaded ) {
-            let val = parseInt( $( this ).val() );
-            if( isNaN( val ) || val < 0 || val > 25 )
-                val = 3;
-            $( this ).val( val );
-            config.showQueueNotifications = val;
-            saveConfig();
-        }
+        let val = parseInt( $( this ).val() );
+        if( isNaN( val ) || val < 0 || val > 25 )
+            val = 3;
+        $( this ).val( val );
+        config.showQueueNotifications = val;
+        saveConfig();
     } )
     .on( 'change', 'input[type=checkbox], input[type=radio]', function() {
         if( $( this ).attr( 'type' ) === 'radio' )
@@ -87,6 +88,12 @@ $( 'main' )
                 toggle( this );
             } );
         toggle( this );
+    } )
+    .on( 'change', 'select', function() {
+        let id = $( this ).attr( 'id' );
+        id = id.substring( 0, id.length - 4 );
+        config[ id ] = $( this ).val();
+        saveConfig();
     } );
 
 const toggle = ( button ) => {

@@ -39,6 +39,10 @@ fieldset:first-of-type label {
     padding: 24px 20px 22px;
 }
 
+#notifications {
+    padding-bottom: 5px;
+}
+
 #notifications label {
     padding: 8px 20px 12px;
     text-indent: 20px;

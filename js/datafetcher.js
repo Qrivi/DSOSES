@@ -69,13 +69,7 @@ const parseConsultation = ( consultation, row ) => {
     let position = parseInt( row.substr( 0, row.indexOf( '.' ) ) ) - 1;
 
     console.log( 'Subscribed to: ' + lecturer );
-
-    if( config.showNotifications && dataset.position && dataset.position !== position ) {
-        if( config.showAllNotifications )
-            showNotification( lecturere, position );
-        else if( config.showQueueNotifications >= position )
-            showNotification( lecturere, position );
-    }
+    checkNotificationSettings( lecturer, position );
     dataset = { id: id, lecturer: lecturer, position: position, html: consultation };
 }
 
@@ -84,6 +78,17 @@ const makeError = ( message ) => {
         message = 'Could not connect';
     dataset = { error: message };
     console.log( 'Error: ' + message );
+}
+
+const checkNotificationSettings = ( lecturer, position ) => {
+    loadConfig( () = {
+        if( config.showNotifications && dataset.position && dataset.position !== position ) {
+            if( config.showAllNotifications )
+                showNotification( lecturer, position );
+            else if( parseInt( config.showQueueNotifications ) >= position )
+                showNotification( lecturer, position );
+        }
+    } );
 }
 
 const showNotification = ( lecturer, position ) => {
