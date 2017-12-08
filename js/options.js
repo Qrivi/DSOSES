@@ -1,8 +1,8 @@
-let config;
 let loaded;
 
-chrome.storage.sync.get( 'sosconfig', ( obj ) => {
-    config = obj.sosconfig;
+const init = () => {
+    $( '#showQueueNotifications_val' )
+        .val( config.showQueueNotifications );
 
     $( '#showNotifications' )
         .prop( 'checked', config.showNotifications )
@@ -15,9 +15,6 @@ chrome.storage.sync.get( 'sosconfig', ( obj ) => {
     $( '#showQueueNotifications' )
         .prop( 'checked', !config.showAllNotifications )
         .trigger( 'change' );
-
-    $( '#showQueueNotifications_val' )
-        .val( config.showQueueNotifications );
 
     $( '#autoRefresh' )
         .prop( 'checked', config.autoRefresh )
@@ -47,47 +44,42 @@ chrome.storage.sync.get( 'sosconfig', ( obj ) => {
     $( '.loading' )
         .delay( 500 )
         .fadeOut( 500 );
-} );
+
+};
 
 $( 'main' )
     .on( 'click hover mouseover focus', '.disabled', function( e ) {
         e.stopPropagation();
         e.preventDefault();
         return false;
-    } );
-
-$( '#hideImages' )
-    .change( () => {
+    } )
+    .on( 'change', '#hideImages', function() {
         $( '#fixImages' )
             .parent()
-            .attr( 'class', $( '#hideImages' ).is( ':checked' ) ? 'ok' : 'disabled' );
-    } );
-
-$( '#showNotifications' )
-    .change( function() {
+            .attr( 'class', $( this ).is( ':checked' ) ? '' : 'disabled' );
+    } )
+    .on( 'change', '#showNotifications', function() {
         if( $( this ).is( ':checked' ) )
             $( '#notifications' ).slideDown( 200 );
         else
             $( '#notifications' ).slideUp( 200 );
-    } );
-
-$( '#showQueueNotifications_val' )
-    .focus( () => {
+    } )
+    .on( 'focus', '#showQueueNotifications_val', function() {
         $( '#showQueueNotifications' )
             .prop( 'checked', true )
             .trigger( 'change' );
     } )
-    .on( 'input', () => {
-        let val = parseInt( $( '#showQueueNotifications_val' ).val() );
-        if( isNaN( val ) || val < 0 || val > 25 )
-            val = 3;
-        $( '#showQueueNotifications_val' ).val( val );
-        config.showQueueNotifications = val;
-        save();
-    } );
-
-$( 'input[type=checkbox], input[type=radio]' )
-    .change( function() {
+    .on( 'input', '#showQueueNotifications_val', function() {
+        if( loaded ) {
+            let val = parseInt( $( this ).val() );
+            if( isNaN( val ) || val < 0 || val > 25 )
+                val = 3;
+            $( this ).val( val );
+            config.showQueueNotifications = val;
+            saveConfig();
+        }
+    } )
+    .on( 'change', 'input[type=checkbox], input[type=radio]', function() {
         if( $( this ).attr( 'type' ) === 'radio' )
             $( this )
             .siblings( '[type=radio]' )
@@ -112,10 +104,8 @@ const toggle = ( button ) => {
     else
         config[ id ] = $( button ).is( ':checked' );
 
-    if( loaded ) {
-        //console.log( id, $( button ).is( ':checked' ) );
-        save();
-    }
+    if( loaded )
+        saveConfig();
 }
 
 const toggleDropdown = ( id, checked ) => {
@@ -128,8 +118,4 @@ const toggleDropdown = ( id, checked ) => {
     }
 }
 
-const save = () => {
-    chrome.storage.sync.set( {
-        'sosconfig': config
-    } );
-}
+loadConfig( init );

@@ -1,4 +1,4 @@
-let config = {
+var config = {
     refreshRate: 12345,
     showNotifications: true,
     showAllNotifications: false,
@@ -8,18 +8,18 @@ let config = {
     fixImages: true,
     enableMasonry: true,
     moreColumns: false, //false, always, smart
-    collapsibleTables: false, //false, default, compact
+    collapsibleTables: false //false, default, compact
 };
 
-const saveConfig = () => {
+const saveConfig = ( callback ) => {
     console.log( 'Saving configuration' );
     console.log( config );
     chrome.storage.sync.set( {
         'sosconfig': config
-    } );
+    }, callback );
 }
 
-const loadConfig = () => {
+const loadConfig = ( callback ) => {
     chrome.storage.sync.get( 'sosconfig', ( obj ) => {
         if( obj.sosconfig ) {
             Object.keys( obj.sosconfig )
@@ -27,6 +27,7 @@ const loadConfig = () => {
                     config[ key ] = obj.sosconfig[ key ];
                 } );
         }
-        saveConfig();
+        if( callback ) callback();
+        //    saveConfig( callback );
     } );
 }
