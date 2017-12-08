@@ -51,19 +51,14 @@ const fixImages = ( source ) => {
     if( !source )
         source = $( '.consult-tables-container' );
 
-    source.find( 'img' )
-        .each( function() {
-            if( $( this )
-                .attr( 'src' ) === '/images/lecturers/' ) {
-                let no = $( this )
-                    .attr( 'alt' )
-                    .length;
-                while( no > 9 )
-                    no = Math.floor( no / 2 - 1 );
-                $( this )
-                    .attr( 'src', 'https://sos.devine-tools.be/images/students/dummy-' + no + '.png' );
-            }
-        } );
+    source.find( 'img' ).each( function() {
+        if( $( this ).attr( 'src' ) === '/images/lecturers/' ) {
+            let no = $( this ).attr( 'alt' ).length;
+            while( no > 9 )
+                no = Math.floor( no / 2 - 1 );
+            $( this ).attr( 'src', 'https://sos.devine-tools.be/images/students/dummy-' + no + '.png' );
+        }
+    } );
 
     return source;
 }
@@ -78,12 +73,11 @@ const enableMasonry = () => {
 }
 
 const refreshData = () => {
-    const position = $( window )
-        .scrollTop();
+    const position = $( window ).scrollTop();
 
     $.get( window.location.href, ( data ) => {
-        let newTables = $( data )
-            .find( '.consult-tables-container' );
+        let newTables = $( data ).find( '.consult-tables-container' );
+
         if( config.fixImages )
             newTables = fixImages( newTables );
 
@@ -92,14 +86,11 @@ const refreshData = () => {
             .append( newTables.children() );
 
         if( config.enableMasonry ) {
-            $( '.consult-tables-container' )
-                .masonry( 'destroy' );
+            $( '.consult-tables-container' ).masonry( 'destroy' );
             enableMasonry();
         }
 
-        $( window )
-            .scrollTop( position );
-
+        $( window ).scrollTop( position );
         setNewTime();
     } );
 }
@@ -114,6 +105,5 @@ const setNewTime = () => {
     if( s < 10 )
         s = "0" + s;
 
-    $( '.inline-header h2' )
-        .html( 'LAATST BIJGEWERKT OM ' + h + 'u' + m + '<small style="font-size:.69em"> ' + s + 's</small>' );
+    $( '.inline-header h2' ).html( 'LAATST BIJGEWERKT OM ' + h + 'u' + m + '<small style="font-size:.69em"> ' + s + 's</small>' );
 }

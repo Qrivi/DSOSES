@@ -5,10 +5,7 @@ let enabled;
 const checkAuth = () => {
     $.get( 'https://sos.devine-tools.be/student/consulten', ( data ) => {
             console.log( 'Updating' );
-
-            let title = $( data )
-                .filter( 'title' )
-                .text();
+            let title = $( data ).filter( 'title' ).text();
 
             if( title === 'Devine SOS tool - login' )
                 return makeError( 'Not logged in' );
@@ -49,10 +46,9 @@ const fetchConsultation = ( href ) => {
         $( data )
             .find( '.registrations-container .registration > span' )
             .each( function() {
-                let row = $( this )
-                    .text();
-                if( row
-                    .includes( user ) ) {
+                let row = $( this ).text();
+
+                if( row.includes( user ) ) {
                     enabled = true;
                     parseConsultation( this.closest( 'article.table' ), row );
                 } else {
@@ -74,12 +70,12 @@ const parseConsultation = ( consultation, row ) => {
 
     console.log( 'Subscribed to: ' + lecturer );
 
-    if( config.showNotifications && dataset.position && dataset.position !== position )
+    if( config.showNotifications && dataset.position && dataset.position !== position ) {
         if( config.showAllNotifications )
             showNotification( lecturere, position );
         else if( config.showQueueNotifications >= position )
-        showNotification( lecturere, position );
-
+            showNotification( lecturere, position );
+    }
     dataset = { id: id, lecturer: lecturer, position: position, html: consultation };
 }
 
@@ -104,8 +100,3 @@ const showNotification = ( lecturer, position ) => {
         message: message
     } );
 }
-
-// document.getElementById( 'btn' )
-//     .addEventListener( 'click', checkAuth );
-// document.getElementById( 'btn2' )
-//     .addEventListener( 'click', () => console.log( consultations ) );
