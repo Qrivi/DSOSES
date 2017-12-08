@@ -54,6 +54,10 @@ const init = () => {
         .fadeOut( 500 );
 };
 
+$( document ).keyup( function( e ) {
+    if( e.keyCode === 27 ) window.close();
+} );
+
 $( 'main' )
     .on( 'click hover mouseover focus', '.disabled', function( e ) {
         e.stopPropagation();
