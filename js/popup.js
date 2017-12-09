@@ -8,14 +8,18 @@ $( '[data-link]' )
     } );
 
 $( '.info' )
-    .click( () => $( '.info' ).slideDown() );
+    .click( function() {
+        $( '.info' ).slideDown();
+    } );
 
 $( '#options' )
-    .click( () => chrome.runtime.openOptionsPage() );
+    .click( function() {
+        chrome.runtime.openOptionsPage();
+    } );
 
-$( '#pause' )
+$( '#play, #pause' )
     .click( () => {
-        $( '#pause' ).addClass( 'busy' );
+        $( this ).addClass( 'busy' );
         $( 'article' ).hide();
         $( 'article.loading' ).show();
         setTimeout(
@@ -24,13 +28,10 @@ $( '#pause' )
         );
     } );
 
-$( '#play' )
-    .click( () => {
-        $( '#play' ).addClass( 'busy' );
-        $( 'article' ).hide();
-        $( 'article.loading' ).show();
-        bg.checkAuth( init, true );
-    } );
+$( 'button.icon.trash' ).click( function() {
+    console.log( 'hi' );
+    chrome.tabs.create( { url: bg.url + '?unsubscribe=' + $( this ).attr( 'data-registration-id' ) } );
+} );
 
 const update = () => {
     $( 'article.table' ).remove();

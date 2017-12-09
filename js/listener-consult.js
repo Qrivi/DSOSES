@@ -1,4 +1,3 @@
-let action;
 let config;
 let collapsed = [];
 
@@ -21,16 +20,14 @@ chrome.storage.sync.get( 'sosconfig', ( obj ) => {
         autoRefresh();
 } );
 
-// $( '.registration button.trash' )
-//     .on( 'click', () => { action = 'uitschrijven' } );
-//
-// $( '.details button.subscribe' )
-//     .on( 'click', () => { action = 'inschrijven' } );
+$( () => {
+    if( window.location.search.includes( 'unsubscribe=' ) )
+        $( 'button.icon.trash' ).click();
+} );
 
 $( '.sa-confirm-button-container button.confirm' )
     .on( 'click', () => {
-        //chrome.runtime.sendMessage( { "message": "perform_action", "action": action } );
-        chrome.runtime.sendMessage( { "message": "check_auth" } );
+        chrome.runtime.sendMessage( { 'message': 'check_auth' } );
     } );
 
 const collapsibleTables = () => {
@@ -118,7 +115,7 @@ const enableMasonry = () => {
 }
 
 const autoRefresh = () => {
-    let img = chrome.extension.getURL( "/img/pulse.gif" );
+    let img = chrome.extension.getURL( '/img/pulse.gif' );
     $( '.inline-header h1' )
         .text( $( '.inline-header h2' ).text() );
     $( '.inline-header' )
@@ -185,9 +182,9 @@ const setNewTime = () => {
     let m = d.getMinutes();
     let s = d.getSeconds();
     if( m < 10 )
-        m = "0" + m;
+        m = '0' + m;
     if( s < 10 )
-        s = "0" + s;
+        s = '0' + s;
 
     $( '.inline-header h2' ).html( 'LAATST BIJGEWERKT OM ' + h + 'u' + m + '<small style="font-size:.69em"> ' + s + 's</small>' );
 }

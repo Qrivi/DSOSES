@@ -1,4 +1,5 @@
 var dataset;
+var url;
 let user;
 let run;
 
@@ -52,13 +53,13 @@ const fetchConsultation = ( href, callback ) => {
                     table = this.closest( 'article.table' );
             } );
         if( table )
-            parseConsultation( table, row, callback );
+            parseConsultation( href, table, row, callback );
         else
             callback();
     } );
 }
 
-const parseConsultation = ( table, row, callback ) => {
+const parseConsultation = ( href, table, row, callback ) => {
     let lecturer = $( table )
         .find( '.table-name span' )
         .first()
@@ -68,8 +69,9 @@ const parseConsultation = ( table, row, callback ) => {
         .toLowerCase();
     let position = parseInt( row.substr( 0, row.indexOf( '.' ) ) ) - 1;
 
-    run++;
     dataset = { id: id, lecturer: lecturer, position: position, html: table };
+    url = href;
+    run++;
 
     console.log( 'Subscribed to: ' + lecturer );
     checkNotificationSettings( lecturer, position );

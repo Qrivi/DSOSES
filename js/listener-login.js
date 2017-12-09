@@ -1,1 +1,1 @@
-chrome.runtime.sendMessage( { "message": "check_auth" } );
+chrome.runtime.sendMessage( { 'message': 'check_auth' } );

@@ -2,7 +2,8 @@
     "manifest_version": 2,
     "name": "Devine SOS Enhancement Suite",
     "description": "Verbeter elke ervaring met het Devine-studentenopvolgingssysteem.",
-    "version": "0.69",
+    "version": "0.1.1",
+    "version_name": "0.1.1-20171209",
 
     "icons": {
         "128": "img/icon128.png"
@@ -16,7 +17,7 @@
         "matches": ["*://sos.devine-tools.be/student", "*://sos.devine-tools.be/login"],
         "js": ["js/listener-login.js"]
     }, {
-        "matches": ["*://sos.devine-tools.be/student/registreer/consult/*", "http://sandbox.krivi.be/sos/tafels.html"],
+        "matches": ["*://sos.devine-tools.be/student/registreer/consult/*"],
         "js": ["js/lib/jquery-3.2.1.min.js", "js/lib/masonry.pkgd.min.js", "js/listener-consult.js"]
     }],
 

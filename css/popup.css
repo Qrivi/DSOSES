@@ -236,3 +236,29 @@ p.info {
     font-weight: 700;
     color: #EA5888;
 }
+
+button.icon.trash {
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    cursor: pointer;
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    text-decoration: none;
+    margin-bottom: 8px;
+    margin-right: 8px;
+    background-image: url(https://sos.devine-tools.be/images/icons/trash.svg);
+}
+
+button.icon.trash:hover {
+    background-image: url(https://sos.devine-tools.be/images/icons/trash-over.svg);
+}
+
+.icon>span {
+    display: none;
+}
