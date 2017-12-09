@@ -18,10 +18,11 @@ $( '#options' )
     } );
 
 $( '#play, #pause' )
-    .click( () => {
-        $( this ).addClass( 'busy' );
+    .click( function() {
         $( 'article' ).hide();
-        $( 'article.loading' ).show();
+        $( '#play, #pause' ).addClass( 'busy' );
+        $( '#play, #pause, article.loading' ).show();
+        $( this ).hide();
         setTimeout(
             () => bg.checkAuth( init ),
             2000
@@ -29,14 +30,13 @@ $( '#play, #pause' )
     } );
 
 $( 'button.icon.trash' ).click( function() {
-    console.log( 'hi' );
     chrome.tabs.create( { url: bg.url + '?unsubscribe=' + $( this ).attr( 'data-registration-id' ) } );
 } );
 
 const update = () => {
     $( 'article.table' ).remove();
     $( '#play, #pause' ).removeClass( 'busy' );
-    $( 'article, #play, #pause' ).hide();
+    $( '#play, #pause, article' ).hide();
     if( !bg || !bg.dataset ) {
         $( 'article.error' ).show();
         return;

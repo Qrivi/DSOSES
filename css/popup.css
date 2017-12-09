@@ -43,11 +43,11 @@ body {
     left: 8px;
 }
 
-.top-bar svg#pause, .top-bar svg#play:hover, .top-bar svg#play.busy {
+.top-bar svg#pause, .top-bar svg#pause.busy:hover, .top-bar svg#play:hover {
     fill: #EA5888;
 }
 
-.top-bar svg#play, .top-bar svg#pause:hover, .top-bar svg#pause.busy, .top-bar svg:hover {
+.top-bar svg#play, .top-bar svg#play.busy:hover, .top-bar svg#pause:hover, .top-bar svg:hover {
     fill: #74FBFD;
 }
 
