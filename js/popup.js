@@ -19,14 +19,16 @@ $( '#options' )
 
 $( '#play, #pause' )
     .click( function() {
-        $( 'article' ).hide();
-        $( '#play, #pause' ).addClass( 'busy' );
-        $( '#play, #pause, article.loading' ).show();
-        $( this ).hide();
-        setTimeout(
-            () => bg.checkAuth( init ),
-            2000
-        );
+        if( !$( '#play, #pause' ).hasClass( 'busy' ) ) {
+            $( '#play, #pause' ).addClass( 'busy' );
+            $( 'article' ).hide();
+            $( '#play, #pause, article.loading' ).show();
+            $( this ).hide();
+            setTimeout(
+                () => bg.checkAuth( init ),
+                2000
+            );
+        }
     } );
 
 $( 'button.icon.trash' ).click( function() {
