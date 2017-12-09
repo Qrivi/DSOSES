@@ -44,7 +44,10 @@ const update = () => {
         return;
     }
 
-    if( bg.dataset.error && bg.dataset.error === "Not logged in" ) {
+    if( bg.dataset.error && bg.dataset.error === "Offline" ) {
+        $( '#pause' ).show();
+        $( 'article.offline' ).show();
+    } else if( bg.dataset.error && bg.dataset.error === "Not logged in" ) {
         $( 'article.login' ).show();
     } else if( bg.dataset.empty ) {
         $( '#pause' ).show();
@@ -53,6 +56,7 @@ const update = () => {
         $( '#play' ).show();
         $( 'main' ).append( bg.dataset.html );
     } else {
+        $( '#pause' ).show();
         $( 'article.error' ).show();
     }
 }

@@ -4,7 +4,8 @@ let user;
 let run;
 
 var checkAuth = ( callback, forceStop ) => {
-    $.get( 'https://sos.devine-tools.be/student/consulten', ( data ) => {
+    if( navigator.onLine )
+        $.get( 'https://sos.devine-tools.be/student/consulten', ( data ) => {
             console.log( 'Updating' );
             chrome.browserAction.setBadgeText( { text: '' } );
             let title = $( data ).filter( 'title' ).text();
@@ -42,6 +43,8 @@ var checkAuth = ( callback, forceStop ) => {
         .fail( () => {
             makeError( 'Could not connect', callback );
         } );
+    else
+        makeError( 'Offline', callback );
 }
 
 const fetchConsultation = ( href, callback ) => {
