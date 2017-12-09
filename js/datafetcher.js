@@ -10,9 +10,9 @@ var checkAuth = ( callback, forceStop ) => {
             let title = $( data ).filter( 'title' ).text();
 
             if( title === 'Devine SOS tool - login' )
-                return makeError( 'Not logged in' );
+                return makeError( 'Not logged in', callback );
             if( title !== 'Devine SOS tool - overzicht consulten' )
-                return makeError( 'Something went wrong' );
+                return makeError( 'Something went wrong', callback );
             if( !user )
                 $.get( 'https://sos.devine-tools.be/student/profiel', ( data ) => {
                     user = $( data )
@@ -39,7 +39,9 @@ var checkAuth = ( callback, forceStop ) => {
             else if( callback )
                 callback();
         } )
-        .fail( makeError );
+        .fail( () => {
+            makeError( 'Could not connect', callback );
+        } );
 }
 
 const fetchConsultation = ( href, callback ) => {
@@ -86,12 +88,12 @@ const parseConsultation = ( href, table, row, callback ) => {
         setTimeout( checkAuth, config.refreshRate );
 }
 
-const makeError = ( message ) => {
-    if( !message )
-        message = 'Could not connect';
+const makeError = ( message, callback ) => {
     dataset = { error: message };
     console.log( 'Error: ' + message );
     chrome.browserAction.setBadgeText( { text: '!' } );
+    if( callback )
+        callback();
 }
 
 const checkNotificationSettings = ( lecturer, position ) => {
