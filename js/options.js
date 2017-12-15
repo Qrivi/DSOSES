@@ -8,6 +8,8 @@ const init = () => {
     if( config.collapsibleTables )
         $( '#collapsibleTables_val' ).val( config.collapsibleTables );
 
+    $( '#notificationSound_val' ).val( config.notificationSound );
+
     $( '#showNotifications' )
         .prop( 'checked', config.showNotifications )
         .trigger( 'change' );
@@ -107,6 +109,11 @@ $( 'main' )
         id = id.substring( 0, id.length - 4 );
         config[ id ] = $( this ).val();
         saveConfig();
+        if( id === 'notificationSound' ) {
+            let audio = new Audio( '../snd/' + config[ id ] + '.mp3' );
+            audio.play();
+            audio.remove();
+        }
     } );
 
 const toggle = ( button ) => {
@@ -124,17 +131,21 @@ const toggle = ( button ) => {
     else
         config[ id ] = $( button ).is( ':checked' );
 
+    if( id === 'showNotifications' )
+        toggleDropdown( 'notificationSound', $( button ).is( ':checked' ), true );
+
     if( loaded )
         saveConfig();
 }
 
-const toggleDropdown = ( id, checked ) => {
+const toggleDropdown = ( id, checked, ignoreOff ) => {
     if( checked ) {
         $( '#' + id + '_val' ).fadeIn();
         config[ id ] = $( '#' + id + '_val' ).val();
     } else {
         $( '#' + id + '_val' ).fadeOut();
-        config[ id ] = false;
+        if( !ignoreOff )
+            config[ id ] = false;
     }
 }
 

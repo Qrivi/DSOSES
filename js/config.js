@@ -9,7 +9,8 @@ var config = {
     fixImages: true,
     enableMasonry: true,
     moreColumns: false, //false, always, smart
-    collapsibleTables: false //false, default, compact
+    collapsibleTables: false, //false, default, compact
+    notificationSound: "devine" // none, basso, bell, devine, pop
 };
 
 const saveConfig = ( callback ) => {

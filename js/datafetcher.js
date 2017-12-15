@@ -118,6 +118,12 @@ const showNotification = ( lecturer, position ) => {
     else if( position === 0 )
         message = 'Het is nu jouw beurt bij ' + lecturer + '! Veel succes!'
 
+    if( config.notificationSound && config.notificationSound !== 'none' ) {
+        let audio = new Audio( '../snd/' + config.notificationSound + '.mp3' );
+        audio.play();
+        audio.remove();
+    }
+
     chrome.notifications.create( {
         type: 'basic',
         iconUrl: '../img/icon.png',
