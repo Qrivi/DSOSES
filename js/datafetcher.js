@@ -84,7 +84,7 @@ const parseConsultation = ( href, table, row, callback ) => {
         callback();
 
     if( position )
-        chrome.browserAction.setBadgeText( { text: position } );
+        chrome.browserAction.setBadgeText( { text: position.toString() } );
     else
         chrome.browserAction.setBadgeText( { text: 'GO!' } );
 
