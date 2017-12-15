@@ -1,6 +1,10 @@
 let config;
 let collapsed = [];
 
+if( window.location.search.includes( 'unsubscribe=' ) )
+    $( 'button.icon.trash' ).click();
+
+chrome.runtime.sendMessage( { 'message': 'check_auth' } );
 chrome.storage.sync.get( 'sosconfig', ( obj ) => {
     config = obj.sosconfig;
     console.log( 'Loaded configuration' );
@@ -19,16 +23,6 @@ chrome.storage.sync.get( 'sosconfig', ( obj ) => {
     if( config.autoRefresh )
         autoRefresh();
 } );
-
-$( () => {
-    if( window.location.search.includes( 'unsubscribe=' ) )
-        $( 'button.icon.trash' ).click();
-} );
-
-$( '.sa-confirm-button-container button.confirm' )
-    .on( 'click', () => {
-        chrome.runtime.sendMessage( { 'message': 'check_auth' } );
-    } );
 
 const collapsibleTables = () => {
     $( 'head' ).append(
