@@ -18,10 +18,10 @@ chrome.storage.sync.get( 'sosconfig', ( obj ) => {
         addColumns();
     if( config.collapsibleTables )
         collapsibleTables();
-    if( config.enableMasonry )
-        setTimeout( enableMasonry, 500 ); // better: wait till images/fixImages() are loaded/ready
     if( config.autoRefresh )
         autoRefresh();
+    if( !config.autoRefresh && config.enableMasonry )
+        enableMasonry();
 } );
 
 const collapsibleTables = () => {
@@ -93,6 +93,9 @@ const fixImages = ( source ) => {
         }
     } );
 
+    if( !source && config.enableMasonry )
+        enableMasonry();
+
     return source;
 }
 
@@ -151,10 +154,11 @@ const refreshData = () => {
             .empty()
             .append( newTables.children() );
 
-        if( config.enableMasonry ) {
+        if( $( '.consult-tables-container' ).attr( 'style' ) )
             $( '.consult-tables-container' ).masonry( 'destroy' );
+
+        if( config.enableMasonry )
             enableMasonry();
-        }
 
         $( window ).scrollTop( position );
         setNewTime();
