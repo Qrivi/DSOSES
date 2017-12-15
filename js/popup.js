@@ -31,7 +31,7 @@ $( '#play, #pause' )
         }
     } );
 
-$( 'button.icon.trash' ).click( function() {
+$( 'body' ).on( 'click', 'button.icon.trash', function() {
     chrome.tabs.create( { url: bg.url + '?unsubscribe=' + $( this ).attr( 'data-registration-id' ) } );
 } );
 
