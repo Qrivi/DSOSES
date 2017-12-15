@@ -38,7 +38,7 @@ const collapsibleTables = () => {
             size += 160;
     }
 
-    $( '.consult-tables-container' ).on( 'click', '.table-name', function() {
+    $( 'main' ).on( 'click', '.consult-tables-container .table-name', function() {
         let table = 'article.table[data-consult-table-id="' + $( this ).parent().attr( 'data-consult-table-id' ) + '"]';
 
         if( collapsed.includes( table ) )
