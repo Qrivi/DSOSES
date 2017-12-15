@@ -19,13 +19,15 @@ DSOSES is a Chrome extension for [Devine](https://devine.be) students that, as i
 - DSOSES relies heavily on jQuery. It'd be nice to get rid of that dependency.
 - [Maybe something else you'd like to see](https://github.com/Qrivi/DSOSES/issues/new).
 
+---
+
 ## Why is this extension in German?
-It's not German, it's Dutch. Since Devine's SOS Tool is only available in Dutch, I figured it'd be nicer if the extension was too. You know: to fit in with the whole "none of our users is more acquainted with English" theme.
+It's not German, it's Dutch. Since Devine's SOS Tool is only available in Dutch, I figured it'd be nicer if the extension was too. You know: to fit in with the whole "none of our users are more acquainted with English" theme.
 
 ## I'd like to contribute!
 I appreciate that! Feel free to fork, spoon or knife and submit a pull request when you're ready for desert. Or if you have a great suggestion but would rather not get your fingers dirty yourself: [submit an issue](https://github.com/Qrivi/DSOSES/issues/new)!
 
-## Some legal notes
-The [license](https://github.com/Qrivi/DSOSES/blob/master/LICENSE) covers what I'm okay with you do with this code, so I'll use this section to explicitely state that I am not affiliated with nor endorsed by Devine or Hogeschool West-Vlaanderen. I started writing this extension because the Devine SOS Tool is so limited it's almost frustrating, and decided to share so I open sourced it.  
+## Small legal note
+The [license](https://github.com/Qrivi/DSOSES/blob/master/LICENSE) covers what I'm okay with you do with this code, so I'll wrap this up by explicitely stating that I am not affiliated with nor endorsed by Devine or Hogeschool West-Vlaanderen. I started writing this extension because the Devine SOS Tool is so limited it's almost frustrating, and decided to share so I open sourced it. Please enjoy and only use dark themed text editors if you decide to edit this code.
 
 ![cool](https://github.com/Qrivi/DSOSES/blob/master/img/icon128.png)
