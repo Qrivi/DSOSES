@@ -59,7 +59,7 @@ const fetchConsultation = ( href, callback ) => {
             } );
         if( table )
             parseConsultation( href, table, row, callback );
-        else
+        else if( callback )
             callback();
     } );
 }
@@ -80,7 +80,8 @@ const parseConsultation = ( href, table, row, callback ) => {
 
     console.log( 'Subscribed to: ' + lecturer );
     checkNotificationSettings( lecturer, position );
-    callback();
+    if( callback )
+        callback();
 
     if( position )
         chrome.browserAction.setBadgeText( { text: position } );
