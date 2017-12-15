@@ -10,14 +10,14 @@ chrome.storage.sync.get( 'sosconfig', ( obj ) => {
     console.log( 'Loaded configuration' );
     console.log( config );
 
-    if( config.hideImages )
-        hideImages();
-    if( !config.hideImages && config.fixImages )
-        fixImages();
     if( config.moreColumns )
         addColumns();
     if( config.collapsibleTables )
         collapsibleTables();
+    if( config.hideImages )
+        hideImages();
+    if( !config.hideImages && config.fixImages )
+        fixImages();
     if( config.autoRefresh )
         autoRefresh();
     if( !config.autoRefresh && config.enableMasonry )
@@ -125,10 +125,10 @@ const autoRefresh = () => {
         .after( '<section class="consult-tables-container">&nbsp;</section>' );
 
     $( 'main' ).on( 'click', '.consult-tables-container button.icon.subscribe', function() {
-        relinkHandler( this, 'subscribe' );
+        relink( this, 'subscribe' );
     } );
     $( 'main' ).on( 'click', '.consult-tables-container button.icon.trash', function() {
-        relinkHandler( this, 'trash' );
+        relink( this, 'trash' );
     } );
 
     if( config.positionInTab )
@@ -199,7 +199,7 @@ const setNewTime = () => {
     $( '.inline-header h2' ).html( 'LAATST BIJGEWERKT OM ' + h + 'u' + m + '<small style="font-size:.69em"> ' + s + 's</small>' );
 }
 
-const relinkHandler = ( target, action ) => {
+const relink = ( target, action ) => {
     let id = $( target ).closest( 'article.table' ).attr( 'data-consult-table-id' );
     $( '.consult-tables-original article.table[data-consult-table-id="' + id + '"] button.' + action ).click();
 }

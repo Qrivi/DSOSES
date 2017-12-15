@@ -32,7 +32,7 @@ $( '#play, #pause' )
     } );
 
 $( 'body' ).on( 'click', 'button.icon.trash', function() {
-    chrome.tabs.create( { url: bg.url + '?unsubscribe=' + $( this ).attr( 'data-registration-id' ) } );
+    chrome.tabs.create( { url: bg.dataset.href + '?unsubscribe=' + $( this ).attr( 'data-registration-id' ) } );
 } );
 
 const update = () => {

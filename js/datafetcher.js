@@ -1,7 +1,6 @@
 var dataset;
-var url;
 let user;
-let run;
+let runs;
 let pos;
 
 var checkAuth = ( callback, forceStop ) => {
@@ -24,7 +23,7 @@ var checkAuth = ( callback, forceStop ) => {
                     console.log( 'Fetched user: ', user );
                 } );
 
-            run = 0;
+            runs = 0;
             dataset = { empty: true };
 
             if( forceStop ) {
@@ -75,9 +74,8 @@ const parseConsultation = ( href, table, row, callback ) => {
         .toLowerCase();
     let position = parseInt( row.substr( 0, row.indexOf( '.' ) ) ) - 1;
 
-    dataset = { id: id, lecturer: lecturer, position: position, html: table };
-    url = href;
-    run++;
+    dataset = { id: id, lecturer: lecturer, position: position, href: href, html: table };
+    runs++;
 
     console.log( 'Subscribed to: ' + lecturer );
 
@@ -99,7 +97,7 @@ const parseConsultation = ( href, table, row, callback ) => {
     else
         chrome.browserAction.setBadgeText( { text: 'GO!' } );
 
-    if( run === 1 )
+    if( runs === 1 )
         setTimeout( checkAuth, config.refreshRate );
 }
 
