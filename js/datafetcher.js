@@ -2,6 +2,7 @@ var dataset;
 var url;
 let user;
 let run;
+let pos;
 
 var checkAuth = ( callback, forceStop ) => {
     if( navigator.onLine )
@@ -79,7 +80,17 @@ const parseConsultation = ( href, table, row, callback ) => {
     run++;
 
     console.log( 'Subscribed to: ' + lecturer );
-    checkNotificationSettings( lecturer, position );
+
+    loadConfig( () => {
+        if( config.showNotifications && dataset.position !== pos ) {
+            pos = dataset.position;
+            if( config.showAllNotifications )
+                showNotification( lecturer, position );
+            else if( parseInt( config.showQueueNotifications ) >= position )
+                showNotification( lecturer, position );
+        }
+    } );
+
     if( callback )
         callback();
 
@@ -100,17 +111,6 @@ const makeError = ( message, callback ) => {
         callback();
 }
 
-const checkNotificationSettings = ( lecturer, position ) => {
-    loadConfig( () => {
-        if( config.showNotifications && dataset.position && dataset.position !== position ) {
-            if( config.showAllNotifications )
-                showNotification( lecturer, position );
-            else if( parseInt( config.showQueueNotifications ) >= position )
-                showNotification( lecturer, position );
-        }
-    } );
-}
-
 const showNotification = ( lecturer, position ) => {
     let message = 'Er zijn nog ' + position + ' studenten voor je bij ' + lecturer + '.';
     if( position === 1 )
@@ -121,7 +121,7 @@ const showNotification = ( lecturer, position ) => {
     chrome.notifications.create( {
         type: 'basic',
         iconUrl: '../img/icon.png',
-        title: 'Wachtrijupdate consult',
+        title: 'Devine SOS',
         message: message
     } );
 }
