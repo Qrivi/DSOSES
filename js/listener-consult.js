@@ -121,11 +121,23 @@ const autoRefresh = () => {
     $( '.inline-header' )
         .css( 'position', 'relative' )
         .append( '<img style="position:absolute;top:0;right:0;width:50px" src="' + img + '" title="Wachtrijen worden live bijgewerkt">' );
+    $( '.consult-tables-container' )
+        .removeClass( 'consult-tables-container' )
+        .addClass( 'consult-tables-original' )
+        .hide()
+        .after( '<section class="consult-tables-container">&nbsp;</section>' );
+
+    $( 'main' ).on( 'click', '.consult-tables-container button.icon.subscribe', function() {
+        relinkHandler( this, 'subscribe' );
+    } );
+    $( 'main' ).on( 'click', '.consult-tables-container button.icon.trash', function() {
+        relinkHandler( this, 'trash' );
+    } );
 
     if( config.positionInTab )
         posToTitle();
 
-    setNewTime();
+    refreshData();
     setInterval( refreshData, config.refreshRate );
 }
 
@@ -187,4 +199,9 @@ const setNewTime = () => {
         s = '0' + s;
 
     $( '.inline-header h2' ).html( 'LAATST BIJGEWERKT OM ' + h + 'u' + m + '<small style="font-size:.69em"> ' + s + 's</small>' );
+}
+
+const relinkHandler = ( target, action ) => {
+    let id = $( target ).closest( 'article.table' ).attr( 'data-consult-table-id' );
+    $( '.consult-tables-original article.table[data-consult-table-id="' + id + '"] button.' + action ).click();
 }
