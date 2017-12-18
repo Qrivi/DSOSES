@@ -1,8 +1,10 @@
 let config;
 let collapsed = [];
 
-if( window.location.search.includes( 'unsubscribe=' ) )
+if( window.location.search.includes( 'unsubscribe=' ) ) {
+    window.history.replaceState( {}, document.title, window.location.href.split( '?' )[ 0 ] );
     $( 'button.icon.trash' ).click();
+}
 
 chrome.runtime.sendMessage( { 'message': 'check_auth' } );
 chrome.storage.sync.get( 'sosconfig', ( obj ) => {
