@@ -54,29 +54,33 @@ const update = () => {
         $( 'article.empty' ).show();
     } else if( bg.dataset.html ) {
         $( '#play' ).show();
-        $( 'main' ).append( bg.dataset.html );
-        processImages();
+        $( 'main' ).append( processImages( bg.dataset.html ) );
     } else {
         $( '#pause' ).show();
         $( 'article.error' ).show();
     }
 }
 
-const processImages = () => {
+const processImages = ( source ) => {
+    output = $( source ).clone();
+
     if( bg.config.hideImages )
-        $( '.lecturers-container' ).hide();
+        output.find( '.lecturers-container' ).hide();
     else
-        $( '.lecturers-container img' ).each( function() {
+        output.find( '.lecturers-container img' ).each( function() {
             if( bg.config.fixImages && $( this ).attr( 'src' ) === '/images/lecturers/' ) {
                 let no = $( this ).attr( 'alt' ).length;
                 while( no > 9 )
                     no = Math.floor( no / 2 - 1 );
                 $( this ).attr( 'src', 'https://sos.devine-tools.be/images/students/dummy-' + no + '.png' );
             } else {
-                $( this ).attr( 'src', 'https://sos.devine-tools.be' + src );
+                $( this ).attr( 'src', 'https://sos.devine-tools.be' + $( this ).attr( 'src' ) );
             }
         } );
+
+    return output;
 }
+
 const init = () => {
     bg = chrome.extension.getBackgroundPage();
     update();
