@@ -24,6 +24,18 @@ chrome.storage.sync.get( 'sosconfig', ( obj ) => {
         enableMasonry();
 } );
 
+const collapseTables = ( size ) => {
+    let output = '';
+    if( collapsed.length )
+        output = collapsed.join() + '{max-height: ' + size + 'px !important}' +
+        collapsed.map( t => t += ' .table-name' ).join() + '{cursor: s-resize !important}'
+
+    $( '#collapsed' ).text( output );
+
+    if( config.enableMasonry )
+        enableMasonry();
+}
+
 const collapsibleTables = () => {
     $( 'head' ).append(
         '<style>article.table{overflow: hidden} .table-name{cursor: n-resize}' +
@@ -38,6 +50,12 @@ const collapsibleTables = () => {
             size += 160;
     }
 
+    chrome.storage.local.get( 'collapsedTables', ( obj ) => {
+        if( obj.collapsedTables )
+            collapsed = obj.collapsedTables;
+        collapseTables( size );
+    } );
+
     $( 'main' ).on( 'click', '.consult-tables-container .table-name', function() {
         let table = 'article.table[data-consult-table-id="' + $( this ).parent().attr( 'data-consult-table-id' ) + '"]';
 
@@ -46,15 +64,11 @@ const collapsibleTables = () => {
         else
             collapsed.push( table );
 
-        let output = '';
-        if( collapsed.length )
-            output = collapsed.join() + '{max-height: ' + size + 'px !important}' +
-            collapsed.map( t => t += ' .table-name' ).join() + '{cursor: s-resize !important}'
+        chrome.storage.local.set( {
+            'collapsedTables': collapsed
+        } );
 
-        $( '#collapsed' ).text( output );
-
-        if( config.enableMasonry )
-            enableMasonry();
+        collapseTables( size );
     } );
 }
 

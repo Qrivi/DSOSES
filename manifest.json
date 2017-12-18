@@ -2,8 +2,8 @@
     "manifest_version": 2,
     "name": "Devine SOS Enhancement Suite",
     "description": "Verbeter elke ervaring met het Devine-studentenopvolgingssysteem.",
-    "version": "1.0.6",
-    "version_name": "1.0.6-20171215",
+    "version": "1.0.7",
+    "version_name": "1.0.7-17.12.18",
 
     "icons": {
         "128": "img/icon128.png"

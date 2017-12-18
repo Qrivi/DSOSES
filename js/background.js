@@ -1,3 +1,4 @@
+chrome.storage.local.clear();
 chrome.runtime.onMessage.addListener(
     ( request ) => {
         console.log( 'Message received from tab' );
