@@ -102,6 +102,7 @@ const parseConsultation = ( href, table, row, callback ) => {
 }
 
 const makeError = ( message, callback ) => {
+    user = false;
     dataset = { error: message };
     console.log( 'Error: ' + message );
     chrome.browserAction.setBadgeText( { text: '!' } );
